@@ -1,1 +1,4 @@
 # Python 의존성 패키지 목록 (pip install -r requirements.txt)
+
+pytest
+selenium
