@@ -1,7 +1,5 @@
 # 작업자 이름: 5조 / 마무리 연수
 
-# 실제 테스트 스크립트 (test_*.py 형식)
-
 import time
 import pytest
 import inspect
@@ -10,7 +8,7 @@ from src.pages.mainPage import mainPage
 from src.utils import mainLocators
 
 # 테스트 끝나면 함수 내 모든 time.sleep() 삭제하기
-def test_register_001(createDriver): # 테스트 완료
+def test_register_001(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("메인 페이지")
@@ -21,7 +19,7 @@ def test_register_001(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-def test_register_002(createDriver): # 테스트 완료
+def test_register_002(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
@@ -37,7 +35,7 @@ def test_register_002(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-def test_register_003(createDriver): # 테스트 완료
+def test_register_003(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
@@ -58,7 +56,6 @@ def test_register_003(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-#@pytest.mark.ys
 def test_register_004(createDriver):
     try:
         myMainPage = mainPage(createDriver)
@@ -99,7 +96,7 @@ def test_register_004(createDriver):
 #         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
 @pytest.mark.dy
-def test_register_023(createDriver): # 테스트 완료
+def test_register_023(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
@@ -110,10 +107,8 @@ def test_register_023(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")   
 
-
-
 # 터미널 실행문: python -m pytest -m "sh"
-def test_register_024(createDriver): #테스트 완료
+def test_register_024(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
@@ -124,7 +119,7 @@ def test_register_024(createDriver): #테스트 완료
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
 # 터미널 실행문: python -m pytest -m "cy"
-def test_register_025(createDriver): # 테스트 완료
+def test_register_025(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")     
@@ -139,7 +134,7 @@ def test_register_025(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")    
 
-def test_register_026(createDriver): # 테스트 완료
+def test_register_026(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")     
@@ -153,7 +148,6 @@ def test_register_026(createDriver): # 테스트 완료
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-@pytest.mark.cy
 def test_register_027(createDriver): 
     try:
         myMainPage = mainPage(createDriver)
@@ -171,7 +165,6 @@ def test_register_027(createDriver):
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-@pytest.mark.cy
 def test_register_029(createDriver): 
     try:
         myMainPage = mainPage(createDriver)
@@ -184,14 +177,13 @@ def test_register_029(createDriver):
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
 
-
 def test_register_030(createDriver):
     try:
         myMainPage = mainPage(createDriver)
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         
-def test_register_032(createDriver): # 테스트 완료
+def test_register_032(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("비밀번호 재설정 페이지")

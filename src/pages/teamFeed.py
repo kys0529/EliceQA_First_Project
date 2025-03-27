@@ -11,7 +11,7 @@ class teamFeed():
     def __init__(self, driver: WebDriver):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
-        self.logger = setupLogger("mainPage")
+        self.logger = setupLogger("teamFeed")
 
         with open("credentials.json", "r", encoding="utf-8") as f: # 나중에 auth.json 파일 이름을 credentials.json으로 변경해주기
             self.userInfo = json.load(f)

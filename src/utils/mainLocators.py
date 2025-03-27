@@ -94,8 +94,3 @@ TEXTAREA_LIKE = (By.NAME, "pros")
 TEXTAREA_HATE = (By.NAME, "cons")
 SUBMIT_BTN = (By.XPATH, "//button[text()='제출하기']") #@원본
 TEXT_UNDER_10 = (By.XPATH, "//p[text()='10자 이상 입력해주세요']") 
-
-
-
-
-

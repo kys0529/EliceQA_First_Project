@@ -21,39 +21,39 @@ class mainPage():
         self.wait = WebDriverWait(self.driver, 10)
         self.logger = setupLogger("mainPage")
 
-        with open("credentials.json", "r", encoding="utf-8") as f: # 나중에 auth.json 파일 이름을 credentials.json으로 변경해주기
+        with open("credentials.json", "r", encoding="utf-8") as f:
             self.userInfo = json.load(f)
 
     def goToPage(self, depth2):
+        email, pw = self.getRandomAccount()
+
         if (depth2 == "메인 페이지"):
             self.driver.get(self.URL)
+        elif (depth2 == "로그인 페이지"):
+            self.driver.get(self.URL)
+            self.getElement(mainLocators.LOGIN_BTN).click()
         elif (depth2 == "회원가입 페이지"):
             self.driver.get(self.URL)
             self.getElement(mainLocators.REGISTER_BTN).click()
         elif (depth2 == "앱 인증 권한"):
             self.driver.get(self.URL)
             self.getElement(mainLocators.REGISTER_BTN).click()
-            email, pw = self.getRandomAccount()
             self.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
             self.getElement(mainLocators.REGISTER_PW).send_keys(pw)
             self.getElement(mainLocators.RE_GOING_BTN).click()
-        elif (depth2 == "로그인 오류 페이지"):
-            pass # 이건 나중에
         elif (depth2 == "인적사항 작성 페이지"):
             self.driver.get(self.URL)
             self.getElement(mainLocators.REGISTER_BTN).click()
-            email, pw = self.getRandomAccount()
             self.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
             self.getElement(mainLocators.REGISTER_PW).send_keys(pw)
             self.getElement(mainLocators.RE_GOING_BTN).click()
             self.getElement(mainLocators.ACCEPT_BTN).click()
-        elif (depth2 == "로그인 페이지"):
-            self.driver.get(self.URL)
-            self.getElement(mainLocators.LOGIN_BTN).click()
         elif (depth2 == "비밀번호 재설정 페이지"):
             self.driver.get(self.URL)
             self.getElement(mainLocators.LOGIN_BTN).click()
             self.getElement(mainLocators.PW_RESET).click()
+        elif (depth2 == "로그인 오류 페이지"):
+            pass # 이건 나중에
 
     def getElement(self, element):
         result = self.wait.until(EC.presence_of_element_located(element))
