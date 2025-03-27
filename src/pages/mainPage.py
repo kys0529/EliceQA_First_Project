@@ -20,6 +20,7 @@ class mainPage():
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
         self.logger = setupLogger("mainPage")
+        self.faker = Faker()
 
         with open("credentials.json", "r", encoding="utf-8") as f:
             self.userInfo = json.load(f)
@@ -60,8 +61,7 @@ class mainPage():
         return result
     
     def getRandomAccount(self):
-        faker = Faker()
-        return faker.email(), faker.password(length=8)
+        return self.faker.email(), self.faker.password(length=8)
     
     def screenDiff(self, locator, funcName, imageName, action, msg=""):
         time.sleep(2)
