@@ -68,12 +68,14 @@ class mainPage():
             self.getElement(mainLocators.AUTH_DECLINE_BTN).click()
 
     def getElement(self, element):
-        result = self.wait.until(EC.presence_of_element_located(element))
-        return result
+        return self.wait.until(EC.presence_of_element_located(element))
+
+    def getElements(self, element):
+        return self.wait.until(EC.presence_of_all_elements_located(element))
     
     def getRandomAccount(self):
         return self.faker.email(), self.faker.password(length=8)
-    
+
     def screenDiff(self, locator, funcName, imageName, action, msg=""):
         time.sleep(2)
         self.driver.save_screenshot(f"reports/screenshots/{funcName}_{imageName}_before.png")

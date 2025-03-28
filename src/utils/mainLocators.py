@@ -42,6 +42,7 @@ RESET_EMAIL_INPUT = (By.ID, "email")
 RESET_GOING_BTN = (By.XPATH, "//button[text()='계속']")
 RESET_BACK_LOGIN_BTN = (By.XPATH, "//button[text()='로그인 화면으로 돌아가기']") # 로그인 화면으로 돌아가기
 
+RESET_EMAIL_ERROR_TXT = (By.ID, "error-element-email")
 RESET_TXT = (By.XPATH, "//p[text()='이메일 주소를 입력하면 비밀번호 재설정 지침을 보내드립니다.']")
 
 # 메일 확인 안내 페이지 (비밀번호 재설정 페이지 -> '이메일 주소' 필드 입력 후 [계속] 버튼 클릭)
@@ -64,25 +65,29 @@ ERROR_TXT = (By.XPATH, "//h2[text()='로그인 오류']")
 USERINFO_NAME_INPUT = (By.XPATH, "//input[@placeholder='이름을 입력해주세요']")
 USERINFO_NAME_ERROR = (By.XPATH, "//p[text()='이름을 입력해주세요']")
 
-USERINFO_TEAM_DROP_DOWN = (By.XPATH, "//button[@role='combobox']") # 해당 버튼을 누르면 aria-expanded 속성과 data-state 속성이 다름 
-USERINFO_TEAM_DEV_1 = (By.XPATH, "//div[normalize-space(text())='개발 1팀']")
-USERINFO_TEAM_DEV_2 = (By.XPATH, "//div[normalize-space(text())='개발 2팀']")
-USERINFO_TEAM_DESIGN_1 = (By.XPATH, "//div[normalize-space(text())='디자인 1팀']")
-USERINFO_TEAM_DESIGN_2 = (By.XPATH, "//div[normalize-space(text())='디자인 2팀']")
+USERINFO_TEAM_DROP_DOWN = (By.XPATH, "//button[@role='combobox']") # 해당 버튼을 누르면 aria-expanded 속성과 data-state 속성이 변동됨
+USERINFO_TEAM_DEV_1 = (By.XPATH, '//*[@id="radix-:r0:"]/div/div/div[2]')
+USERINFO_TEAM_DEV_2 = (By.XPATH, '//*[@id="radix-:r0:"]/div/div/div[3]')
+USERINFO_TEAM_DESIGN_1 = (By.XPATH, '//*[@id="radix-:r0:"]/div/div/div[4]')
+USERINFO_TEAM_DESIGN_2 = (By.XPATH, '//*[@id="radix-:r0:"]/div/div/div[5]')
+USERINFO_TEAM_NAME = (By.XPATH, "//span[@style='pointer-events: none;']")
 USERINFO_TEAM_ERROR = (By.XPATH, "//p[text()='팀을 선택해주세요']")
 
-# # 음식성향(슬라이드바) / test_register_016 , test_register_019
-# SWEET_SLIDERBAR = (By.XPATH, "//span[text()='단 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
-# SALTY_SLIDERBAR = (By.XPATH, "//span[text()='짠 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
-# SPICY_SLIDERBAR = (By.XPATH, "//span[text()='매운 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
-# BAR_UNDER_1 = (By.XPATH, "//p[text()='맛에 대한 성향은 최소 1 이상 설정해주세요']")
+USERINFO_SLIDER_SECTIONS = (By.CSS_SELECTOR, "section.flex.items-center.w-full")
+USERINFO_SLIDER_THUMB = (By.CSS_SELECTOR, "span[style*='transform']")
 
-# # 음식성향(텍스트) / test_register_017, test_register_018, test_register_019
-# TEXTAREA_LIKE = (By.NAME, "pros")
-# TEXTAREA_HATE = (By.NAME, "cons")
-# SUBMIT_BTN = (By.XPATH, "//button[text()='제출하기']") #@원본
-# TEXT_UNDER_10 = (By.XPATH, "//p[text()='10자 이상 입력해주세요']")
+#USERINFO_SWEET_SLIDERBAR = (By.XPATH, "//span[text()='단 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
+#USERINFO_SALTY_SLIDERBAR = (By.XPATH, "//span[text()='짠 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
+#USERINFO_SPICY_SLIDERBAR = (By.XPATH, "//span[text()='매운 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
+USERINFO_SLIDERBAR_ERROR = (By.XPATH, "//p[text()='맛에 대한 성향은 최소 1 이상 설정해주세요']")
+
+USERINFO_TEXTAREA_LIKE = (By.NAME, "pros")
+USERINFO_TEXTAREA_HATE = (By.NAME, "cons")
+USERINFO_TEXTAREA_ERROR = (By.XPATH, "//p[text()='10자 이상 입력해주세요']")
 
 USERINFO_SUBMIT_BTN = (By.XPATH, "//button[text()='제출하기']")
 
 USERINFO_TXT = (By.XPATH, "//span[text()='🔥 서비스 이용을 위해 인적사항을 작성해주세요']")
+
+# 홈 탭 요소
+HOME_TXT = (By.XPATH, "//p[text()='💻 AI를 통해 음식 메뉴를 추천 받아 보세요!']")

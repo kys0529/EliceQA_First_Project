@@ -3,6 +3,8 @@
 import time
 import pytest
 import inspect
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 
 from src.pages.mainPage import mainPage
 from src.utils import mainLocators
@@ -21,6 +23,7 @@ def test_register_001(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_002(createDriver):
@@ -37,6 +40,7 @@ def test_register_002(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_003(createDriver):
@@ -58,6 +62,7 @@ def test_register_003(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_004(createDriver):
@@ -87,6 +92,7 @@ def test_register_004(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_005(createDriver):
@@ -104,6 +110,7 @@ def test_register_005(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_006(createDriver):
@@ -122,6 +129,7 @@ def test_register_006(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_007(createDriver):
@@ -133,6 +141,7 @@ def test_register_007(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_008(createDriver):
@@ -146,6 +155,7 @@ def test_register_008(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_009(createDriver):
@@ -159,6 +169,7 @@ def test_register_009(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_register_010(createDriver):
@@ -171,8 +182,69 @@ def test_register_010(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-def test_register_011(createDriver): # 11번부터 18번까지 인적사항 작성 페이지 (일단 보류 / 13번은 제외)
+@pytest.mark.finish
+def test_register_011(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+        assert myMainPage.getElement(mainLocators.USERINFO_NAME_ERROR) 
+        assert myMainPage.getElement(mainLocators.USERINFO_TEAM_ERROR) 
+        assert myMainPage.getElement(mainLocators.USERINFO_SLIDERBAR_ERROR) 
+        assert myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_ERROR)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_012(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        name = myMainPage.faker.name()
+        myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).send_keys(name)
+        assert name == myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).get_attribute("value")
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_14(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DEV_1).click()
+        assert "개발 1팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DEV_2).click()
+        assert "개발 2팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DESIGN_1).click()
+        assert "디자인 1팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DESIGN_2).click()
+        assert "디자인 2팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+# 미완성 (슬라이더)
+def test_register_15(createDriver): # 슬라이더 조절 (전부 1.0 미만)
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("인적사항 작성 페이지")
@@ -180,6 +252,48 @@ def test_register_011(createDriver): # 11번부터 18번까지 인적사항 작�
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+# 미완성 (슬라이더)
+def test_register_16(createDriver): # 슬라이더 조절 (전부 3.0)
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_17(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        time.sleep(2)
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_LIKE).send_keys("일이삼사오육칠팔구")
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_HATE).send_keys("일이삼사오육칠팔구")
+        time.sleep(2)
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+        time.sleep(2)
+        assert len(myMainPage.getElements(mainLocators.USERINFO_TEXTAREA_ERROR)) == 2
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+# 미완성 (슬라이더)
+def test_register_18(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_login_001(createDriver):
@@ -193,6 +307,7 @@ def test_login_001(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_login_003(createDriver):
@@ -209,6 +324,7 @@ def test_login_003(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish  
 def test_login_004(createDriver):
@@ -224,6 +340,7 @@ def test_login_004(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
 @pytest.mark.finish
 def test_login_005(createDriver):
@@ -242,67 +359,76 @@ def test_login_005(createDriver):
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-@pytest.mark.ys
+@pytest.mark.finish
 def test_login_006(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
 
+        myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys(myMainPage.userInfo['id'])
+        time.sleep(2)
+        myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys(myMainPage.userInfo['pw'])
+        time.sleep(2)
+        myMainPage.getElement(mainLocators.LOGINP_GOING_BTN).click()
+        time.sleep(2)
+
+        assert myMainPage.getElement(mainLocators.HOME_TXT)
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
 def test_login_007(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
 
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        myMainPage.getElement(mainLocators.LOGINP_PW_RESET_HREF).click()
+        assert myMainPage.getElement(mainLocators.RESET_TXT)
 
-def test_login_008(createDriver):
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")
+        myMainPage.getElement(mainLocators.RESET_BACK_LOGIN_BTN).click()
+        assert myMainPage.getElement(mainLocators.LOGINP_TXT)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
 def test_login_009(createDriver):
     try:
         myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")
+        myMainPage.goToPage("비밀번호 재설정 페이지")
+
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@")
+        myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
+        assert myMainPage.getElement(mainLocators.RESET_EMAIL_ERROR_TXT)
+
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).clear()
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@naver.com")
+        myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
+        assert myMainPage.getElement(mainLocators.MAIL_TXT)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-def test_login_010(createDriver):
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")
-
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-
+@pytest.mark.finish
 def test_login_011(createDriver):
     try:
         myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")
+        myMainPage.goToPage("메일 확인 안내 페이지")
+        time.sleep(2)
+        myMainPage.getElement(mainLocators.MAIL_RESEND_EMAIL_BTN).click()
+        time.sleep(2)
+        assert myMainPage.getElement(mainLocators.RESET_TXT)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-
-def test_login_012(createDriver):
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")
-
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
