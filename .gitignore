@@ -172,3 +172,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# ID 및 비밀번호 파일 무시
+credentials.json
+
+# logs 및 screenshots 내부 파일 무시
+reports/logs/*
+!reports/logs/.gitkeep
+
+reports/screenshots/*
+!reports/screenshots/.gitkeep
