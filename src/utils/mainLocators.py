@@ -1,4 +1,4 @@
-# 작업자 이름: 5조 / 마무리 연수
+# 작업자 이름: 5조 / 마무리: 강연수
  
 from selenium.webdriver.common.by import By
 
@@ -73,12 +73,8 @@ USERINFO_TEAM_DESIGN_2 = (By.XPATH, '//*[@id="radix-:r0:"]/div/div/div[5]')
 USERINFO_TEAM_NAME = (By.XPATH, "//span[@style='pointer-events: none;']")
 USERINFO_TEAM_ERROR = (By.XPATH, "//p[text()='팀을 선택해주세요']")
 
-USERINFO_SLIDER_SECTIONS = (By.CSS_SELECTOR, "section.flex.items-center.w-full")
-USERINFO_SLIDER_THUMB = (By.CSS_SELECTOR, "span[style*='transform']")
-
-#USERINFO_SWEET_SLIDERBAR = (By.XPATH, "//span[text()='단 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
-#USERINFO_SALTY_SLIDERBAR = (By.XPATH, "//span[text()='짠 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
-#USERINFO_SPICY_SLIDERBAR = (By.XPATH, "//span[text()='매운 맛']/ancestor::section//span[contains(@class, 'bg-light-gray')]")
+USERINFO_SLIDER = (By.XPATH, "//span[@role='slider']")
+USERINFO_SLIDER_VALUE = (By.CSS_SELECTOR, "span.w-8.text-right.text-gray-500.text-subbody")
 USERINFO_SLIDERBAR_ERROR = (By.XPATH, "//p[text()='맛에 대한 성향은 최소 1 이상 설정해주세요']")
 
 USERINFO_TEXTAREA_LIKE = (By.NAME, "pros")
