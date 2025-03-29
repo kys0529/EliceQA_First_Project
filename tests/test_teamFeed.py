@@ -53,7 +53,7 @@ def test_teamFeed_007(createDriver):
     myTeamFeed = teamFeed(createDriver)
     myTeamFeed.goToPage("팀 피드")
     myTeamFeed.getElement(teamFeedLocators.TEAM_PROFILE_CHANGE).click() #프로필 수정 팝업 진입
-    time.sleep(2)
+    time.sleep(1)
 
 #슬라이드 바 테스트 하는 방법 필요
 def test_teamFeed_0071(createDriver):
