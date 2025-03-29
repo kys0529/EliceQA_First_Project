@@ -9,7 +9,7 @@ from src.utils import teamFeedLocators
 def test_teamFeed_001(createDriver): # 함수명 바꾸셔도 좋아요
     myTeamFeed = teamFeed(createDriver) # 변수명 바꾸셔도 좋아요
     myTeamFeed.goToPage("팀 피드")
-    time.sleep(2)
+    time.sleep(1)
 
 
 def test_teamFeed_002(createDriver):
@@ -53,7 +53,7 @@ def test_teamFeed_007(createDriver):
     myTeamFeed = teamFeed(createDriver)
     myTeamFeed.goToPage("팀 피드")
     myTeamFeed.getElement(teamFeedLocators.TEAM_PROFILE_CHANGE).click() #프로필 수정 팝업 진입
-    time.sleep(2)
+    time.sleep(1)
 
 #슬라이드 바 테스트 하는 방법 필요
 def test_teamFeed_0071(createDriver):
