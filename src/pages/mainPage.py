@@ -4,11 +4,13 @@
 
 import json
 import time
+import random
 from faker import Faker
 from PIL import Image, ImageChops
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 from src.utils import mainLocators
 from src.utils.logger import setupLogger
@@ -20,49 +22,74 @@ class mainPage():
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
         self.logger = setupLogger("mainPage")
-        self.faker = Faker()
+        self.faker = Faker('ko_KR')
+        self.action = ActionChains(driver)
 
         with open("credentials.json", "r", encoding="utf-8") as f:
             self.userInfo = json.load(f)
 
     def goToPage(self, depth2):
-        email, pw = self.getRandomAccount()
+        email = self.faker.email()
+        pw = self.faker.password()
 
         if (depth2 == "메인 페이지"):
             self.driver.get(self.URL)
         elif (depth2 == "로그인 페이지"):
             self.driver.get(self.URL)
-            self.getElement(mainLocators.LOGIN_BTN).click()
+            self.getElement(mainLocators.MAINP_LOGIN_BTN).click()
         elif (depth2 == "회원가입 페이지"):
             self.driver.get(self.URL)
-            self.getElement(mainLocators.REGISTER_BTN).click()
+            self.getElement(mainLocators.MAINP_REGISTER_BTN).click()
         elif (depth2 == "앱 인증 권한"):
             self.driver.get(self.URL)
-            self.getElement(mainLocators.REGISTER_BTN).click()
-            self.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
-            self.getElement(mainLocators.REGISTER_PW).send_keys(pw)
-            self.getElement(mainLocators.RE_GOING_BTN).click()
+            self.getElement(mainLocators.MAINP_REGISTER_BTN).click()
+            self.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(email)
+            self.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+            self.getElement(mainLocators.REGP_GOING_BTN).click()
         elif (depth2 == "인적사항 작성 페이지"):
             self.driver.get(self.URL)
-            self.getElement(mainLocators.REGISTER_BTN).click()
-            self.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
-            self.getElement(mainLocators.REGISTER_PW).send_keys(pw)
-            self.getElement(mainLocators.RE_GOING_BTN).click()
-            self.getElement(mainLocators.ACCEPT_BTN).click()
+            self.getElement(mainLocators.MAINP_REGISTER_BTN).click()
+            self.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(email)
+            self.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+            self.getElement(mainLocators.REGP_GOING_BTN).click()
+            self.getElement(mainLocators.AUTH_ACCEPT_BTN).click()
         elif (depth2 == "비밀번호 재설정 페이지"):
             self.driver.get(self.URL)
-            self.getElement(mainLocators.LOGIN_BTN).click()
-            self.getElement(mainLocators.PW_RESET).click()
+            self.getElement(mainLocators.MAINP_LOGIN_BTN).click()
+            self.getElement(mainLocators.LOGINP_PW_RESET_HREF).click()
+        elif (depth2 == "메일 확인 안내 페이지"):
+            self.driver.get(self.URL)
+            self.getElement(mainLocators.MAINP_LOGIN_BTN).click()
+            self.getElement(mainLocators.LOGINP_PW_RESET_HREF).click()
+            self.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys(email)
+            self.getElement(mainLocators.RESET_GOING_BTN).click()
         elif (depth2 == "로그인 오류 페이지"):
-            pass # 이건 나중에
+            self.driver.get(self.URL)
+            self.getElement(mainLocators.MAINP_REGISTER_BTN).click()
+            self.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(email)
+            self.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+            self.getElement(mainLocators.REGP_GOING_BTN).click()
+            self.getElement(mainLocators.AUTH_DECLINE_BTN).click()
 
     def getElement(self, element):
-        result = self.wait.until(EC.presence_of_element_located(element))
-        return result
+        return self.wait.until(EC.presence_of_element_located(element))
+
+    def getElements(self, element):
+        return self.wait.until(EC.presence_of_all_elements_located(element))
     
-    def getRandomAccount(self):
-        return self.faker.email(), self.faker.password(length=8)
-    
+    def getRandomTeam(self):
+        numbers = [0, 1, 2, 3]
+        randomNumber = random.choice(numbers)
+
+        if randomNumber == 0:
+            return mainLocators.USERINFO_TEAM_DEV_1
+        elif randomNumber == 1:
+            return mainLocators.USERINFO_TEAM_DEV_2
+        elif randomNumber == 2:
+            return mainLocators.USERINFO_TEAM_DESIGN_1
+        elif randomNumber == 3:
+            return mainLocators.USERINFO_TEAM_DESIGN_2
+
     def screenDiff(self, locator, funcName, imageName, action, msg=""):
         time.sleep(2)
         self.driver.save_screenshot(f"reports/screenshots/{funcName}_{imageName}_before.png")

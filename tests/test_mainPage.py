@@ -1,202 +1,446 @@
 # 작업자 이름: 5조 / 마무리 연수
 
-import time
 import pytest
 import inspect
 
 from src.pages.mainPage import mainPage
 from src.utils import mainLocators
 
-# 테스트 끝나면 함수 내 모든 time.sleep() 삭제하기
+@pytest.mark.finish
 def test_register_001(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("메인 페이지")
-        myMainPage.getElement(mainLocators.REGISTER_BTN).click()
+        assert myMainPage.getElement(mainLocators.MAINP_TXT)
 
-        assert myMainPage.getElement(mainLocators.REGISTER_TXT)
+        myMainPage.getElement(mainLocators.MAINP_REGISTER_BTN).click()
+        assert myMainPage.getElement(mainLocators.REGP_TXT)
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
 def test_register_002(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
-        myMainPage.getElement(mainLocators.LOGIN_HREF).click()
-
-        assert myMainPage.getElement(mainLocators.LOGIN_TXT)
+        myMainPage.getElement(mainLocators.REGP_LOGIN_HREF).click()
+        assert myMainPage.getElement(mainLocators.LOGINP_TXT)
 
         myMainPage.goToPage("로그인 페이지")
-        myMainPage.getElement(mainLocators.REGISTER_HREF).click()
+        myMainPage.getElement(mainLocators.LOGINP_REGISTER_HREF).click()
+        assert myMainPage.getElement(mainLocators.REGP_TXT)
 
-        assert myMainPage.getElement(mainLocators.REGISTER_TXT)
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
 def test_register_003(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
+        emailResult = myMainPage.screenDiff(mainLocators.REGP_EMAIL_INPUT, inspect.currentframe().f_code.co_name, "email", "click")
+        assert emailResult == True
 
-        result = myMainPage.screenDiff(mainLocators.REGISTER_EMAIL, inspect.currentframe().f_code.co_name, "email", "click")
-        assert result == True
+        pwResult = myMainPage.screenDiff(mainLocators.REGP_PW_INPUT, inspect.currentframe().f_code.co_name, "pw", "click")
+        assert pwResult == True
 
-        result = myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "pw", "click")
-        assert result == True
-
-        email, pw = myMainPage.getRandomAccount()
-        myMainPage.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
-        myMainPage.getElement(mainLocators.REGISTER_PW).send_keys(pw)
-        myMainPage.getElement(mainLocators.RE_GOING_BTN).click()
-
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(myMainPage.faker.email())
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
+        myMainPage.getElement(mainLocators.REGP_GOING_BTN).click()
         assert myMainPage.getElement(mainLocators.AUTH_TXT)
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
 def test_register_004(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
-        time.sleep(2)
 
-        email, pw = myMainPage.getRandomAccount()
-        myMainPage.getElement(mainLocators.REGISTER_EMAIL).send_keys(email)
-        time.sleep(2)
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(myMainPage.faker.email())
 
-        myMainPage.getElement(mainLocators.REGISTER_PW).send_keys("a")
-        print(f"디버깅 확인용: {myMainPage.getElement(mainLocators.PW_LOWER_LETTER).get_attribute('class')}")
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("a")
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_LOWER_LETTERS).get_attribute('class')
 
-        # 구현 덜 함
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("A")
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_UPPER_LETTERS).get_attribute('class')
 
-        # myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "lower", "send", "a")
-        # myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "upper", "send", "A")
-        # myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "number", "send", "1")
-        # myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "special", "send", "@")
-        # myMainPage.screenDiff(mainLocators.REGISTER_PW, inspect.currentframe().f_code.co_name, "length", "send", "1234")
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("1")
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_UPPER_LETTERS).get_attribute('class')
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_VALID_3).get_attribute('class')
+
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("@")
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_SPECIAL_CHARACTERS).get_attribute('class')
+
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("5678")
+        assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_LEAST_8).get_attribute('class')
         
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-# # 확인불가 삭제예정
-# @pytest.mark.dy
-# # 터미널 실행문: python -m pytest -m "dy"   
-# def test_register_022(createDriver):
-#     try: 
-#         myMainPage = mainPage(createDriver) # 이 코드는 내부적으로 이렇게 동작함 mainPage.__init__(myMainPage, createDriver)
-#         myMainPage.goToPage("로그인 페이지")
-#         result = myMainPage.screenDiff(mainLocators.ID_INPUT, inspect.currentframe().f_code.co_name, "email", "click")
+@pytest.mark.finish
+def test_register_005(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("회원가입 페이지")
+
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys("test@naver")
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
+        myMainPage.getElement(mainLocators.REGP_GOING_BTN).click()
+
+        assert myMainPage.getElement(mainLocators.REGP_EMAIL_ERROR_TXT)
         
-#         assert result == True
-#         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-#     except Exception as e:
-#         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-@pytest.mark.dy
-def test_register_023(createDriver):
+@pytest.mark.finish
+def test_register_006(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("회원가입 페이지")
+
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
+        myMainPage.getElement(mainLocators.REGP_PW_TOGGLE_BTN).click()
+        assert "text" in myMainPage.getElement(mainLocators.REGP_PW_INPUT).get_attribute("type")
+
+        myMainPage.getElement(mainLocators.REGP_PW_TOGGLE_BTN).click()
+        assert "password" in myMainPage.getElement(mainLocators.REGP_PW_INPUT).get_attribute("type")
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_007(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("앱 인증 권한")
+        assert myMainPage.getElement(mainLocators.AUTH_TXT)
+        
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_008(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("앱 인증 권한")
+
+        myMainPage.getElement(mainLocators.AUTH_ACCEPT_BTN).click()
+        assert myMainPage.getElement(mainLocators.USERINFO_TXT)
+    
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_009(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("앱 인증 권한")
+
+        myMainPage.getElement(mainLocators.AUTH_DECLINE_BTN).click()
+        assert myMainPage.getElement(mainLocators.ERROR_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_010(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("로그인 오류 페이지")
+        myMainPage.getElement(mainLocators.ERROR_RETRY).click()
+        assert myMainPage.getElement(mainLocators.MAINP_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_011(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+        assert myMainPage.getElement(mainLocators.USERINFO_NAME_ERROR) 
+        assert myMainPage.getElement(mainLocators.USERINFO_TEAM_ERROR) 
+        assert myMainPage.getElements(mainLocators.USERINFO_SLIDERBAR_ERROR) 
+        assert myMainPage.getElements(mainLocators.USERINFO_TEXTAREA_ERROR)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_012(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        name = myMainPage.faker.name()
+        myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).send_keys(name)
+        assert name == myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).get_attribute("value")
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_14(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DEV_1).click()
+        assert "개발 1팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DEV_2).click()
+        assert "개발 2팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DESIGN_1).click()
+        assert "디자인 1팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DESIGN_2).click()
+        assert "디자인 2팀" == myMainPage.getElement(mainLocators.USERINFO_TEAM_NAME).text
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_15(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(30, 0).release().perform()
+     
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+
+        assert len(myMainPage.getElements(mainLocators.USERINFO_SLIDERBAR_ERROR)) == 3
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_16(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(240, 0).release().perform()
+
+        values = myMainPage.getElements(mainLocators.USERINFO_SLIDER_VALUE)
+        for value in values:
+            assert value.text == "3.0"
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_17(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_LIKE).send_keys("일이삼사오육칠팔구")
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_HATE).send_keys("일이삼사오육칠팔구")
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+        assert len(myMainPage.getElements(mainLocators.USERINFO_TEXTAREA_ERROR)) == 2
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_register_18(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).send_keys(myMainPage.faker.name())
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(myMainPage.getRandomTeam()).click()
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(240, 0).release().perform()
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_LIKE).send_keys("피자, 치킨, 마라샹궈, 보쌈, 초밥, 과자")
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_HATE).send_keys("생강, 미역줄기, 민초, 고수, 미더덕, 굴")
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+
+        assert myMainPage.getElement(mainLocators.MAINP_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_login_001(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("메인 페이지")
+
+        myMainPage.getElement(mainLocators.MAINP_LOGIN_BTN).click()
+        assert myMainPage.getElement(mainLocators.LOGINP_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_login_003(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
-        result = myMainPage.screenDiff(mainLocators.PW_INPUT, inspect.currentframe().f_code.co_name, "pw", "click")
 
-        assert result == True
+        pwResult = myMainPage.screenDiff(mainLocators.LOGINP_PW_INPUT, inspect.currentframe().f_code.co_name, "pw", "click")
+        assert pwResult == True
+
+        emailResult = myMainPage.screenDiff(mainLocators.LOGINP_EMAIL_INPUT, inspect.currentframe().f_code.co_name, "email", "click")
+        assert emailResult == True
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")   
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-# 터미널 실행문: python -m pytest -m "sh"
-def test_register_024(createDriver):
+@pytest.mark.finish  
+def test_login_004(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
-        myMainPage.getElement(mainLocators.PW_INPUT).send_keys("a")
-        assert "password" == myMainPage.getElement(mainLocators.PW_INPUT).get_attribute("type")
+
+        myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys("test@naver")
+        myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys("1234")
+        myMainPage.getElement(mainLocators.LOGINP_GOING_BTN).click()
+
+        assert myMainPage.getElement(mainLocators.LOGINP_LOGIN_ERROR_TXT)
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-# 터미널 실행문: python -m pytest -m "cy"
-def test_register_025(createDriver):
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")     
-        
-        myMainPage.getElement(mainLocators.PW_INPUT).send_keys("aA1@1234")
-        
-        myMainPage.getElement(mainLocators.PW_TOGGLE_BTN).click()
-        assert "text" in myMainPage.getElement(mainLocators.PW_INPUT).get_attribute("type")
-        myMainPage.getElement(mainLocators.PW_TOGGLE_BTN).click()
-        assert "password" in myMainPage.getElement(mainLocators.PW_INPUT).get_attribute("type")
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")    
-
-def test_register_026(createDriver):
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")     
-        
-        myMainPage.getElement(mainLocators.ID_INPUT).send_keys(myMainPage.userInfo['id'])
-        myMainPage.getElement(mainLocators.PW_INPUT).send_keys(myMainPage.userInfo['pw'])
-        myMainPage.getElement(mainLocators.GOING_BTN).click()
-                
-        assert "https://kdt-pt-1-pj-2-team03.elicecoding.com/" in myMainPage.driver.current_url
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-
-def test_register_027(createDriver): 
-    try:
-        myMainPage = mainPage(createDriver)
-        myMainPage.goToPage("로그인 페이지")  
-        myMainPage.getElement(mainLocators.PW_RESET).click() # 비밀번호를 잊으셨나요?
-        time.sleep(2)
-        
-        assert myMainPage.getElement(mainLocators.PW_FORGET)
-        
-        myMainPage.getElement(mainLocators.PW_BACK_LOGIN).click() # 로그인 화면으로 돌아가기
-        time.sleep(2)
-
-        assert myMainPage.getElement(mainLocators.REGISTER_TXT)
-        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-
-def test_register_029(createDriver): 
+@pytest.mark.finish
+def test_login_005(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
-        myMainPage.getElement(mainLocators.PW_RESET).click()
-        result = myMainPage.screenDiff(mainLocators.ID_INPUT, inspect.currentframe().f_code.co_name, "email", "click")
         
-        assert result == True
+        myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys("1234")
+        
+        myMainPage.getElement(mainLocators.LOGINP_PW_TOGGLE_BTN).click()
+        assert "text" == myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).get_attribute("type")
+        
+        myMainPage.getElement(mainLocators.LOGINP_PW_TOGGLE_BTN).click()
+        assert "password" == myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).get_attribute("type")
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
-def test_register_030(createDriver):
+@pytest.mark.finish
+def test_login_006(createDriver):
     try:
         myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("로그인 페이지")
+
+        myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys(myMainPage.userInfo['id'])
+        myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys(myMainPage.userInfo['pw'])
+        myMainPage.getElement(mainLocators.LOGINP_GOING_BTN).click()
+
+        assert myMainPage.getElement(mainLocators.HOME_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-        
-def test_register_032(createDriver):
+        raise
+
+@pytest.mark.finish
+def test_login_007(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("로그인 페이지")
+
+        myMainPage.getElement(mainLocators.LOGINP_PW_RESET_HREF).click()
+        assert myMainPage.getElement(mainLocators.RESET_TXT)
+
+        myMainPage.getElement(mainLocators.RESET_BACK_LOGIN_BTN).click()
+        assert myMainPage.getElement(mainLocators.LOGINP_TXT)
+
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_login_009(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("비밀번호 재설정 페이지")
-        myMainPage.getElement(mainLocators.REGISTER_EMAIL).send_keys("patrick_chae@naver.com")
-        time.sleep(2)
-        myMainPage.getElement(mainLocators.RESET_GOING_BUTTON).click()
-        time.sleep(2)
-        myMainPage.getElement(mainLocators.RESEND_EMAIL_BTN).click()
-        time.sleep(2)
 
-        assert myMainPage.getElement(mainLocators.RESET_GOING_BUTTON)
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@")
+        myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
+        assert myMainPage.getElement(mainLocators.RESET_EMAIL_ERROR_TXT)
+
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).clear()
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@naver.com")
+        myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
+        assert myMainPage.getElement(mainLocators.MAIL_TXT)
+
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
 
+@pytest.mark.finish
+def test_login_011(createDriver):
+    try:
+        myMainPage = mainPage(createDriver)
+        myMainPage.goToPage("메일 확인 안내 페이지")
+        myMainPage.getElement(mainLocators.MAIL_RESEND_EMAIL_BTN).click()
+        assert myMainPage.getElement(mainLocators.RESET_TXT)
 
+        myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
