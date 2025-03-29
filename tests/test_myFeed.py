@@ -24,7 +24,6 @@ def test_myFeed_002(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
-        time.sleep(2)
 
         # 미구현 (프로필 수정까지는 진입 완료)
 
@@ -33,12 +32,10 @@ def test_myFeed_002(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.ys
 def test_myFeed_003(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("[+] 버튼")
-        time.sleep(2)
 
         # 미구현 ("[+] 버튼"까지는 진입 완료)
 
@@ -51,7 +48,6 @@ def test_myFeed_004(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("같은 메뉴 먹기")
-        time.sleep(2)
 
         # 미구현 ("같은 메뉴 먹기"까지는 진입 완료)
 
