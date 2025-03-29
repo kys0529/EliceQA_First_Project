@@ -6,7 +6,7 @@ from src.pages.teamFeed import teamFeed
 from src.utils import teamFeedLocators
 from selenium.webdriver.common.keys import Keys
 
-
+@pytest.mark.sh  
 def test_teamFeed_001(createDriver): # 함수명 바꾸셔도 좋아요
     myTeamFeed = teamFeed(createDriver) # 변수명 바꾸셔도 좋아요
     myTeamFeed.goToPage("팀 피드")
@@ -48,7 +48,7 @@ def test_teamFeed_007(createDriver):
     myTeamFeed.goToPage("팀 피드")
     myTeamFeed.getElement(teamFeedLocators.TEAM_PROFILE_CHANGE).click() #프로필 수정 팝업 진입
     time.sleep(2)
-         
+        
 def test_teamFeed_008(createDriver):
     myTeamFeed = teamFeed(createDriver)
     myTeamFeed.goToPage("팀 피드")
@@ -56,7 +56,7 @@ def test_teamFeed_008(createDriver):
     myTeamFeed.getElement(teamFeedLocators.CLOSE_BUTTON).click() #닫기
     time.sleep(1)
     
-@pytest.mark.sh 
+
 def test_teamFeed_009(createDriver): #10자 미만 텍스트 입력
     myTeamFeed = teamFeed(createDriver)
     myTeamFeed.goToPage("팀 피드")
