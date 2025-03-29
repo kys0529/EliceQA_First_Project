@@ -9,7 +9,7 @@ from src.utils import teamFeedLocators
 def test_teamFeed_001(createDriver): # 함수명 바꾸셔도 좋아요
     myTeamFeed = teamFeed(createDriver) # 변수명 바꾸셔도 좋아요
     myTeamFeed.goToPage("팀 피드")
-    time.sleep(2)
+    time.sleep(1)
 
 
 def test_teamFeed_002(createDriver):
