@@ -1,4 +1,4 @@
-# 작업자 이름: 5조 / 마무리 연수
+# 작업자 이름: 5조 / 마무리: 강연수
 
 import pytest
 import inspect
