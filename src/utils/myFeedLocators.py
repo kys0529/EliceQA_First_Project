@@ -2,10 +2,37 @@
 
 from selenium.webdriver.common.by import By
 
-MY_FEED_TAB = (By.XPATH, "//a[@href='/my']")
+# /.. : 해당 요소의 부모
+# /preceding-sibling : 해당 요소의 같은 부모 아래, 앞에 있는 형제
+# /following-sibling : 해당 요소의 같은 부모 아래, 뒤에 있는 형제
+# <svg>는 HTML이 아니라 SVG 네임스페이스(XML 기반) 이기 때문에, //svg 또는 //preceding-sibling::svg 처럼 사용시 실패 확률 높음
+#  ~> *[name()='svg'] 처럼 네임스페이스 무시하고 svg 태그로 정확하게 인식 (네임스페이스: HTML이나 XML에서 같은 이름의 태그가 충돌하지 않도록 구분해주는 것)
 
-MY_PROFILE_CHANGE_SVG = (By.XPATH, "//*[name()='svg' and @class='cursor-pointer']")
+# 홈 요소
+HOME_TXT = (By.XPATH, "//span[text()='오늘 뭐먹지 ?']")
+
+# 개인 피드 요소
+MY_FEED_TAB = (By.XPATH, "//a[@href='/my']")
+MY_FEED_BACK_PAGE = (By.XPATH, "//span[text()='내 피드']/preceding-sibling::*[name()='svg']")
 MY_MENU_PLUS_BTN = (By.XPATH, "//span[contains(text(), '내가 먹은 메뉴')]/following-sibling::button")
 MY_EAT_SAME_MENU_BTN = (By.XPATH, "//span[contains(text(), '내가 먹은 메뉴')]/../following-sibling::div//button[text()='같은 메뉴 먹기']") # 제일 상단에 위치한 [같은 메뉴 먹기] 버튼
 
 MY_FEED_TXT = (By.XPATH, "//span[text()='내 피드']")
+
+# 프로필 수정
+MY_PROFILE_CHANGE_SVG = (By.XPATH, "//*[name()='svg' and @class='cursor-pointer']")
+MY_PROFILE_CHANGE_CANCEL_SVG = (By.XPATH, "//span[contains(text(), '프로필 정보 수정')]/following-sibling::button")
+
+MY_PROFILE_IMG_CHANGE_BTN = (By.XPATH, "//img[@alt='프로필 이미지']/../following-sibling::button")
+MY_PROFILE_IMG_INPUT = (By.NAME, "profileImageUrl")
+MY_PROFILE_IMG_URL = (By.XPATH, "//img[@alt='프로필 이미지']")
+
+MY_PROFILE_SLIDER = (By.XPATH, "//span[contains(text(), '음식 성향')]/following-sibling::div//span[@role='slider']")
+MY_PROFILE_SLIDER_VALUE = (By.CSS_SELECTOR, "span.w-8.text-right.text-gray-500.text-subbody")
+MY_PROFILE_SLIDERBAR_ERROR = (By.XPATH, "//p[text()='맛에 대한 성향은 최소 1 이상 설정해주세요']")
+
+MY_PROFILE_TEXTAREA_LIKE = (By.NAME, "pros")
+MY_PROFILE_TEXTAREA_HATE = (By.NAME, "cons")
+MY_PROFILE_TEXTAREA_ERROR = (By.XPATH, "//p[text()='10자 이상 입력해주세요']")
+
+MY_PROFILE_CHANGE_COMPLETE_BTN = (By.XPATH, "//button[text()='프로필 수정 완료']")
