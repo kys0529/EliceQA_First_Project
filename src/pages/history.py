@@ -4,6 +4,7 @@ import json
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 from src.utils.helpers import autoLogin
 from src.utils.logger import setupLogger
 
@@ -17,3 +18,7 @@ class history():
             self.userInfo = json.load(f)
 
         autoLogin(self.driver, self.wait, self.userInfo)
+        
+    def goToPage(self, depth2)
+    if (depth2 == "히스토리"):
+        self.getElement(historyLocators.HISTORY_BTN).click()
