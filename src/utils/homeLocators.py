@@ -5,8 +5,8 @@ from selenium.webdriver.common.by import By
 # [HOME] 홈 피드 페이지
 # 혼자먹기,같이먹기,회식하기 텍스트 포함된 상위 버튼 선택 
 HOME_ALONE_BTN = (By.XPATH, "//p[text()='혼자 먹기']/ancestor::button")
-HOME_ALONE_BTN = (By.XPATH, "//p[text()='같이 먹기']/ancestor::button")
-HOME_ALONE_BTN = (By.XPATH, "//p[text()='혼자 먹기']/ancestor::button")
+HOME_TOGETHER_BTN = (By.XPATH, "//p[text()='같이 먹기']/ancestor::button")
+HOME_TEAM_BTN = (By.XPATH, "//p[text()='회식 하기']/ancestor::button")
 
 
 # [RECOMMEND] 추천 옵션 선택 페이지
@@ -45,13 +45,13 @@ RECOMMEND_OPTION_ETC_RESULT = (By.XPATH, "//button[@role='combobox'][.//span[tex
 RECOMMEND_MEMBER_TITLE_TXT = (By.XPATH, "//span[text()='먹는 인원']")
 
 # 👤 사용자 이름 - 상단 <span>태그 / 혼자먹기
-RECOMMEND_MEMBER_NAME_UP = (By.XPATH, "//span[text()='다예']") # 텍스트 값 수정필요
+RECOMMEND_MEMBER_UP = (By.XPATH, "//span[text()='다예']") # 텍스트 값 수정필요
 
 # 👤 사용자 이름 - 하단 <div>태그 / 혼자먹기
-RECOMMEND_MEMBER_NAME_DOWN = (By.XPATH, "//div[text()='다예']") # 텍스트 값 수정필요
+RECOMMEND_MEMBER_DOWN = (By.XPATH, "//div[text()='다예']") # 텍스트 값 수정필요
 
 # 👤 부서/팀 정보 텍스트 / 혼자먹기
-RECOMMEND_TEAM_NAME_TXT = (By.XPATH, "//div[text()='디자인 1팀']") # 텍스트 값 수정필요
+RECOMMEND_TEAM_TXT = (By.XPATH, "//div[text()='디자인 1팀']") # 텍스트 값 수정필요
 
 # 👤👤 이름 인풋 박스 / 같이먹기
 RECOMMEND_SURCH_NAME = (By.XPATH, "//input[text()='이름을 검색해주세요']")
@@ -60,13 +60,13 @@ RECOMMEND_SURCH_NAME = (By.XPATH, "//input[text()='이름을 검색해주세요'
 RECOMMEND_MEMBER_LIST = (By.XPATH, "//div[@class='font-semibold' and text()='정준하']")
 
 # 👤👤 부서/팀 리스트 / 같이먹기
-RECOMMEND_TEAM_NAME_LIST = (By.XPATH, "//div[@class=text-gray-500' and text()='개발 1팀']")
+RECOMMEND_TEAM_LIST = (By.XPATH, "//div[@class=text-gray-500' and text()='개발 1팀']")
 
 # 👤👤 리스트 체크박스/ 같이먹기
 RECOMMEND_CHECKBOX_LIST = (By.XPATH, "//div[@class=cursor-pointer]")
 
 # 👤👤👤 부서/팀 정보 뱃지 / 회식하기
-RECOMMEND_TEAM_NAME_BADGE = (By.XPATH, "//span[text()='디자인 1팀']") # 텍스트 값 수정필요
+RECOMMEND_TEAM_BADGE = (By.XPATH, "//span[text()='디자인 1팀']") # 텍스트 값 수정필요
 
 # ✅ 선택 완료 버튼
 RECOMMEND_SUBMIT_BTN = (By. XPATH, "//button[text()='선택 완료']")
