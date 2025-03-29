@@ -1,15 +1,11 @@
 # 작업자 이름: 5조 / 마무리 연수
 
-import time
 import pytest
 import inspect
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 
 from src.pages.mainPage import mainPage
 from src.utils import mainLocators
 
-# 테스트 끝나면 함수 내 모든 time.sleep() 삭제하기
 @pytest.mark.finish
 def test_register_001(createDriver):
     try:
@@ -53,9 +49,8 @@ def test_register_003(createDriver):
         pwResult = myMainPage.screenDiff(mainLocators.REGP_PW_INPUT, inspect.currentframe().f_code.co_name, "pw", "click")
         assert pwResult == True
 
-        email, pw = myMainPage.getRandomAccount()
-        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(email)
-        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(myMainPage.faker.email())
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
         myMainPage.getElement(mainLocators.REGP_GOING_BTN).click()
         assert myMainPage.getElement(mainLocators.AUTH_TXT)
 
@@ -70,8 +65,7 @@ def test_register_004(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
 
-        email, pw = myMainPage.getRandomAccount()
-        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(email)
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys(myMainPage.faker.email())
 
         myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys("a")
         assert "ced6f80b9" in myMainPage.getElement(mainLocators.REGP_PW_LOWER_LETTERS).get_attribute('class')
@@ -100,9 +94,8 @@ def test_register_005(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
 
-        email, pw = myMainPage.getRandomAccount()
         myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys("test@naver")
-        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
         myMainPage.getElement(mainLocators.REGP_GOING_BTN).click()
 
         assert myMainPage.getElement(mainLocators.REGP_EMAIL_ERROR_TXT)
@@ -118,8 +111,7 @@ def test_register_006(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
 
-        email, pw = myMainPage.getRandomAccount()
-        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(pw)
+        myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
         myMainPage.getElement(mainLocators.REGP_PW_TOGGLE_BTN).click()
         assert "text" in myMainPage.getElement(mainLocators.REGP_PW_INPUT).get_attribute("type")
 
@@ -193,8 +185,8 @@ def test_register_011(createDriver):
         myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
         assert myMainPage.getElement(mainLocators.USERINFO_NAME_ERROR) 
         assert myMainPage.getElement(mainLocators.USERINFO_TEAM_ERROR) 
-        assert myMainPage.getElement(mainLocators.USERINFO_SLIDERBAR_ERROR) 
-        assert myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_ERROR)
+        assert myMainPage.getElements(mainLocators.USERINFO_SLIDERBAR_ERROR) 
+        assert myMainPage.getElements(mainLocators.USERINFO_TEXTAREA_ERROR)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
@@ -243,22 +235,38 @@ def test_register_14(createDriver):
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-# 미완성 (슬라이더)
-def test_register_15(createDriver): # 슬라이더 조절 (전부 1.0 미만)
+@pytest.mark.finish
+def test_register_15(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("인적사항 작성 페이지")
+
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(30, 0).release().perform()
+     
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+
+        assert len(myMainPage.getElements(mainLocators.USERINFO_SLIDERBAR_ERROR)) == 3
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-# 미완성 (슬라이더)
-def test_register_16(createDriver): # 슬라이더 조절 (전부 3.0)
+@pytest.mark.finish
+def test_register_16(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("인적사항 작성 페이지")
+
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(240, 0).release().perform()
+
+        values = myMainPage.getElements(mainLocators.USERINFO_SLIDER_VALUE)
+        for value in values:
+            assert value.text == "3.0"
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
@@ -271,12 +279,9 @@ def test_register_17(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("인적사항 작성 페이지")
 
-        time.sleep(2)
         myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_LIKE).send_keys("일이삼사오육칠팔구")
         myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_HATE).send_keys("일이삼사오육칠팔구")
-        time.sleep(2)
         myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
-        time.sleep(2)
         assert len(myMainPage.getElements(mainLocators.USERINFO_TEXTAREA_ERROR)) == 2
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
@@ -284,11 +289,23 @@ def test_register_17(createDriver):
         myMainPage.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-# 미완성 (슬라이더)
+@pytest.mark.finish
 def test_register_18(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("인적사항 작성 페이지")
+
+        myMainPage.getElement(mainLocators.USERINFO_NAME_INPUT).send_keys(myMainPage.faker.name())
+        myMainPage.getElement(mainLocators.USERINFO_TEAM_DROP_DOWN).click()
+        myMainPage.getElement(myMainPage.getRandomTeam()).click()
+        sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
+        for slider in sliders:
+            myMainPage.action.click_and_hold(slider).move_by_offset(240, 0).release().perform()
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_LIKE).send_keys("피자, 치킨, 마라샹궈, 보쌈, 초밥, 과자")
+        myMainPage.getElement(mainLocators.USERINFO_TEXTAREA_HATE).send_keys("생강, 미역줄기, 민초, 고수, 미더덕, 굴")
+        myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
+
+        assert myMainPage.getElement(mainLocators.MAINP_TXT)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
@@ -368,11 +385,8 @@ def test_login_006(createDriver):
         myMainPage.goToPage("로그인 페이지")
 
         myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys(myMainPage.userInfo['id'])
-        time.sleep(2)
         myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys(myMainPage.userInfo['pw'])
-        time.sleep(2)
         myMainPage.getElement(mainLocators.LOGINP_GOING_BTN).click()
-        time.sleep(2)
 
         assert myMainPage.getElement(mainLocators.HOME_TXT)
 
@@ -423,9 +437,7 @@ def test_login_011(createDriver):
     try:
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("메일 확인 안내 페이지")
-        time.sleep(2)
         myMainPage.getElement(mainLocators.MAIL_RESEND_EMAIL_BTN).click()
-        time.sleep(2)
         assert myMainPage.getElement(mainLocators.RESET_TXT)
 
         myMainPage.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
