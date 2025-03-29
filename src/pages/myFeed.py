@@ -34,16 +34,13 @@ class myFeed():
         elif (depth2 == "같은 메뉴 먹기"):
             self.getElement(myFeedLocators.MY_FEED_TAB).click()
             self.scroll(500)
-            self.getClickableElement(myFeedLocators.MY_EAT_SAME_MENU_BTN).click()
+            self.getElement(myFeedLocators.MY_EAT_SAME_MENU_BTN).click()
 
     def getElement(self, element):
         return self.wait.until(EC.presence_of_element_located(element))
 
     def getElements(self, element):
         return self.wait.until(EC.presence_of_all_elements_located(element))
-    
-    def getClickableElement(self, element):
-        return self.wait.until(EC.element_to_be_clickable(element))
     
     def scroll(self, num):
         time.sleep(1)
