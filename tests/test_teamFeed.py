@@ -113,7 +113,7 @@ def test_teamFeed_012(createDriver): #이런 음식은 싫어요! 텍스트 박�
     myTeamFeed.getElement(teamFeedLocators.TEXTAREA_HATE).send_keys("비린내가 강한 해산물은 제가 정말 피하고 싶은 음식 중 하나입니다. 생선 특유의 비린 향이 코를 찌르면 식욕이 완전히 사라져 버립니다. 문어나 오징어 같은 탱글탱글한 식감의 해산물은 씹을 때마다 거부감이 들어요. 어릴 때 해산물을 먹고 심한 알레르기 반응을 경험한 후로 트라우마가 생겼습니다. 가족 모임이나 회식에서 해산물 요리가 나오면 항상 난처한 상황에 처하게 됩니다.") 
     myTeamFeed.getElement(teamFeedLocators.PROFILE_CHANGE_BTN).click()
     myTeamFeed.getElement(teamFeedLocators.TEXTAREA_PLUS_ERROR)
-    time.sleep(2)   
+    time.sleep(1)   
     
 @pytest.mark.sh    
 def test_teamFeed_013(createDriver): #유효한 수정 값
