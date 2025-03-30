@@ -36,3 +36,21 @@ MY_PROFILE_TEXTAREA_HATE = (By.NAME, "cons")
 MY_PROFILE_TEXTAREA_ERROR = (By.XPATH, "//p[text()='10자 이상 입력해주세요']")
 
 MY_PROFILE_CHANGE_COMPLETE_BTN = (By.XPATH, "//button[text()='프로필 수정 완료']")
+MY_PROFILE_CHANGE_COMPLETE_TXT = (By.XPATH, "//div[text()='프로필 수정 완료']")
+
+# 내 통계
+MY_PROFILE_STAT_TXT = (By.XPATH, "//span[text()='📊 내 통계']")
+MY_PROFILE_STAT_IMG = (By.XPATH, "//canvas[@role='img']")
+
+# 새로운 후기 등록하기
+MY_MENU_PLUS_CANCEL_BTN = (By.XPATH, "//span[text()='새로운 후기 등록하기']/following-sibling::button/*[name()='svg']")
+MY_MENU_PLUS_ALONE_BTN = (By.XPATH, "//button[@value='혼밥']")
+MY_MENU_PLUS_GROUP_BTN = (By.XPATH, "//button[@value='그룹']")
+MY_MENU_PLUS_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
+MY_MENU_STAR_BTM = (By.XPATH, "//input[@name='star']") # value 속성값 바꾸면 별점 변경도 되려나?
+MY_MENU_PLUS_COMPLETE_BTN = (By.XPATH, "//button[text()='후기 작성 완료']")
+MY_MENU_PLUS_IMG_ERROR = (By.XPATH, "//p[text()='리뷰 이미지는 필수입니다']")
+MY_MENU_PLUS_MENU_NAME_ERROR = (By.XPATH, "//p[text()='메뉴명은 필수입니다']")
+MY_MENU_PLUS_CATEGORY_ERROR = (By.XPATH, "//p[text()='카테고리는 필수입니다']")
+MY_MENU_PLUS_REVIEW_ERROR = (By.XPATH, "//p[text()='후기는 필수입니다']")
+MY_MENU_PLUS_STAR_ERROR = (By.XPATH, "//p[text()='별점은 최소 1점 이상이어야 합니다']")

@@ -1,5 +1,6 @@
 # 작업자 이름: 강연수
 
+import os
 import time
 import pytest
 import inspect
@@ -91,12 +92,84 @@ def test_myFeed_005(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.ys
+@pytest.mark.finish
 def test_myFeed_006(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
         
+        imagePath = os.path.abspath(os.path.join("src/resources/assets", "profileImage.jpg"))
+        myfeed.getElement(myFeedLocators.MY_PROFILE_IMG_INPUT).send_keys(imagePath)
+        sliders = myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDER)
+        for slider in sliders:
+            myfeed.action.click_and_hold(slider).move_by_offset(500, 0).release().perform()
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).clear()
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).clear()
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).send_keys("피자, 치킨, 마라샹궈, 보쌈, 초밥, 과자")
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).send_keys("생강, 미역줄기, 민초, 고수, 미더덕, 굴")
+        myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_TXT)
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_myFeed_007(createDriver):
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("개인 피드")
+
+        assert myfeed.getElement(myFeedLocators.MY_PROFILE_STAT_TXT)
+        assert myfeed.getElement(myFeedLocators.MY_PROFILE_STAT_IMG)
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_myFeed_008(createDriver):
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("[+] 버튼")
+
+        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CANCEL_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_BTN)
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish
+def test_myFeed_009(createDriver):
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("[+] 버튼")
+
+        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_ALONE_BTN).click()
+        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_IMG_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_STAR_ERROR)
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.ys
+def test_myFeed_010(createDriver):
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("[+] 버튼")
+
+        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_ALONE_BTN).click()
+
         # 미구현
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
