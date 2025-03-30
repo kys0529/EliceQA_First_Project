@@ -189,7 +189,7 @@ def test_myFeed_010(createDriver):
         myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).send_keys(randomMenuName)
         assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
 
-        randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음
+        randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음  
         myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_BTN).click()
         myfeed.getElement(randomCategory).click()
         assert myfeed.getElement(myFeedLocators.NY_MENU_PLUS_CATEGORY_TXT).text == randomName
