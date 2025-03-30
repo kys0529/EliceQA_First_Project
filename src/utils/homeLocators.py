@@ -11,7 +11,7 @@ HOME_TEAM_BTN = (By.XPATH, "//p[text()='회식 하기']/ancestor::button")
 
 # [RECOMMEND] 추천 옵션 선택 페이지
 # 🔙 뒤로가기 버튼 
-RECOMMEND_BACK_BTN = (By.XPATH, "//svg[@class='rounded-full cursor-pointer']")
+RECOMMEND_BACK_BTN = (By.XPATH, "//span[text()='추천 옵션 선택']/preceding-sibling::*[name()='svg']")
 
 # 🔺 추천 옵션 선택 텍스트
 RECOMMEND_OPTION_TITLE_TXT = (By.XPATH, "//span[text()='추천 옵션 선택']")
@@ -54,7 +54,16 @@ RECOMMEND_MEMBER_DOWN = (By.XPATH, "//div[text()='다예']") # 텍스트 값 수
 RECOMMEND_TEAM_TXT = (By.XPATH, "//div[text()='디자인 1팀']") # 텍스트 값 수정필요
 
 # 👤👤 이름 인풋 박스 / 같이먹기
-RECOMMEND_SURCH_NAME = (By.XPATH, "//input[text()='이름을 검색해주세요']")
+RECOMMEND_SEARCH_NAME = (By.XPATH, "//input[@placeholder='이름을 검색해주세요']")
+
+# 👤👤 이름 인풋 박스(텍스트 입력) / 같이먹기
+RECOMMEND_SEARCH_INPUT = (By.CSS_SELECTOR, "ul.flex.flex-col > li")
+
+# 👤👤 이름 인풋 박스(결과 선택 단계) / 같이먹기
+RECOMMEND_SEARCH_RESULT = (By. CSS_SELECTOR, "ul > li.cursor-pointer")
+
+# 👤👤 이름 인풋 박스(결과 추가, "x" 아이콘) / 같이먹기
+RECOMMEND_SEARCH_SELECTED = (By.CSS_SELECTOR, "svg.absolute.top-0.cursor-pointer.-right-2")
 
 # 👤👤 이름 리스트 / 같이먹기
 RECOMMEND_MEMBER_LIST = (By.XPATH, "//div[@class='font-semibold' and text()='정준하']")
@@ -68,7 +77,13 @@ RECOMMEND_CHECKBOX_LIST = (By.XPATH, "//div[@class=cursor-pointer]")
 # 👤👤👤 부서/팀 정보 뱃지 / 회식하기
 RECOMMEND_TEAM_BADGE = (By.XPATH, "//span[text()='디자인 1팀']") # 텍스트 값 수정필요
 
-# ✅ 선택 완료 버튼
+# ✅ [선택 완료] 버튼
 RECOMMEND_SUBMIT_BTN = (By. XPATH, "//button[text()='선택 완료']")
 
+# [RESULT] 메뉴추천 페이지
+# [다시 추천 받기] 버튼
+RESULT_RETRY_BTN = ()
+
+# [추천 수락하기] 버튼
+RESULT_ACCEPT_BTN = ()
 
