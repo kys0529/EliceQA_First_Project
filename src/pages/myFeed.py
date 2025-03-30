@@ -3,6 +3,7 @@
 import os
 import json
 import time
+import random
 from PIL import Image, ImageChops
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -49,6 +50,9 @@ class myFeed():
     def getVisibilityElement(self, element):
         return self.wait.until(EC.visibility_of_element_located(element))
     
+    def getClickableElement(self, element):
+        return self.wait.until(EC.element_to_be_clickable(element))
+    
     def scroll(self, num):
         time.sleep(1)
         self.driver.execute_script(f"window.scrollTo(0, {num});")
@@ -71,3 +75,64 @@ class myFeed():
 
         isDiff =  ImageChops.difference(Image.open(f"reports/screenshots/{funcName}_{imageName}_before.png"), Image.open(f"reports/screenshots/{funcName}_{imageName}_after.png"))
         return isDiff.getbbox() is not None
+    
+    def getRandomImage(self):
+        images = ["chicken.jpeg", "hamburger.jpeg", "pizza.jpeg", "ricesoup.jpg", "sushi.jpeg"]
+        return random.choice(images)
+
+    def getRandomMenuName(self):
+        menus = ["치킨", "햄버거", "피자", "국밥", "초밥"]
+        return random.choice(menus)
+
+    def getRandomCategory(self):
+        categories = [
+            ("한식", myFeedLocators.MY_MENU_PLUS_KOREAN_BTN),
+            ("중식", myFeedLocators.MY_MENU_PLUS_CHINESE_BTN),
+            ("양식", myFeedLocators.MY_MENU_PLUS_WESTERN_BTN),
+            ("일식", myFeedLocators.MY_MENU_PLUS_JAPANESE_BTN),
+            ("분식", myFeedLocators.MY_MENU_PLUS_SNACK_BTN),
+            ("아시안", myFeedLocators.MY_MENU_PLUS_ASIAN_BTN),
+            ("패스트푸드", myFeedLocators.MY_MENU_PLUS_FASTFOOD_BTN),
+            ("기타", myFeedLocators.MY_MENU_PLUS_ETC_BTN)
+        ]
+    
+        name, locator = random.choice(categories)
+        return name, locator
+        
+    def getRandomReview(self):
+        reviews = [
+            "치킨 냠냠 바삭바삭 존맛탱~~",
+            "햄버거 냠냠 존맛탱~~",
+            "피자 토핑 대박 풍족~~",
+            "국밥 국물 대박 얼큰~~",
+            "초밥 냠냠 완전 존맛탱~~"
+        ]
+        return random.choice(reviews)
+
+    def getRandomStar(self):
+        stars = [
+            ("1", myFeedLocators.MY_MENU_STAR1),
+            ("2", myFeedLocators.MY_MENU_STAR2),
+            ("3", myFeedLocators.MY_MENU_STAR3),
+            ("4", myFeedLocators.MY_MENU_STAR4),
+            ("5", myFeedLocators.MY_MENU_STAR5)
+        ]
+
+        value, locator = random.choice(stars)
+        return value, locator
+
+    def getReviewPostCount(self):
+        prevCount = -1
+
+        while True:
+            currentElements = self.getElements(myFeedLocators.MY_MENU_PLUS_REVIEW_POST)
+            currentCount = len(currentElements)
+
+            if currentCount == prevCount:
+                break
+
+            prevCount = currentCount
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(2)
+
+        return prevCount
