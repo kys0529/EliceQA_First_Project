@@ -81,10 +81,49 @@ RECOMMEND_TEAM_BADGE = (By.XPATH, "//span[text()='디자인 1팀']") # 텍스트
 # ✅ [선택 완료] 버튼
 RECOMMEND_SUBMIT_BTN = (By. XPATH, "//button[text()='선택 완료']")
 
+
 # [RESULT] 메뉴추천 페이지
-# [다시 추천 받기] 버튼
-RESULT_RETRY_BTN = ()
+# 🔺 메뉴추천 텍스트 (헤더바 안에 있는 "메뉴 추천")
+RESULT_HEADER_TITLE = (By.XPATH, "//span[text()='메뉴 추천']")
 
-# [추천 수락하기] 버튼
-RESULT_ACCEPT_BTN = ()
+# 🔺 "오늘 메뉴는 찜닭 어떠세요?" 텍스트
+RESULT_MENU_TITLE = (By.XPATH, "//span[contains(text(), '오늘 메뉴는')]")
 
+# 🖼️ 찜닭 이미지
+RESULT_MENU_IMAGE = (By.XPATH, "//img[@alt='음식 사진']")
+
+# 🧠 "AI가 분석한 취향 적합률" 텍스트
+RESULT_AI_MATCH_TXT = (By.XPATH, "//div[span[contains(text(), 'AI가 분석한')]]")
+
+# 🧠 "AI가 분석한 취향 적합률" 퍼센트
+RESULT_AI_MATCH_PERCENT = (By.XPATH, "//div[span[contains(text(), '%')]]")
+
+# 🍽️ "찜닭에 해당하는 맛집 리스트" 텍스트
+RESULT_RECOMMENDED_RESTAURANT = (By.XPATH, "//span[contain(text(), '에 해당하는 맛집 리스트')]")
+
+# 🏠 맛집 리스트 전체 (슬라이드/카드 리스트 영역)
+RESULT_RESTAURANT_LIST = (By.CSS_SELECTOR, "div.swiper-slide a")
+
+# 🏠 맛집 리스트 (첫 번째 카드)
+RESULT_RESTAURANT_FIRST = (By.CSS_SELECTOR, "div.swiper-slide-active a")
+
+# 📱 페이지네이션 (첫 번째 점)
+RESULT_RESTAURANT_CAROUSEL_FIRST = (By.CSS_SELECTOR, "span.swiper-pagination-bullet:nth-child(1)")
+
+# 📱 페이지네이션 (두 번째 점)
+RESULT_RESTAURANT_CAROUSEL_SECOND = (By.CSS_SELECTOR, "span.swiper-pagination-bullet:nth-child(2)")
+
+# 📱 페이지네이션 (현재 활성화된 점)
+RESULT_RESTAURANT_CAROUSEL_ACTIVE = (By.CSS_SELECTOR, "span.swiper-pagination-bullet-active")
+
+# 검색 결과가 없습니다
+RESULT_NO_RESTAURANT = (By.XPATH, "//h1[contains(text(), '검색 결과가 없습니다')]")
+
+# 🔁 다시 추천받기 버튼 (초록색)
+RESULT_RETRY_BTN = (By.XPATH, "//button[text()='다시 추천 받기']")
+
+# ✅ 추천 수락하기 버튼 (빨간색)
+RESULT_ACCEPT_BTN = (By.XPATH, "//button[text()='추천 수락하기']")
+
+# ✅ 추천 수락하기 버튼 결과 페이지 > 히스토리 탭 
+RESULT_ACCEPT_BTN_AFTER = (By.XPATH, "//span[contains(text(), '추천 받았던 메뉴들이에요')]")
