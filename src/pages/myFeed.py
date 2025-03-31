@@ -41,17 +41,20 @@ class myFeed():
             self.scroll(500)
             self.getElement(myFeedLocators.MY_EAT_SAME_MENU_BTN).click()
 
-    def getElement(self, element):
-        return self.wait.until(EC.presence_of_element_located(element))
+    def getElement(self, locator):
+        return self.wait.until(EC.presence_of_element_located(locator))
 
-    def getElements(self, element):
-        return self.wait.until(EC.presence_of_all_elements_located(element))
+    def getElements(self, locator):
+        return self.wait.until(EC.presence_of_all_elements_located(locator))
     
-    def getVisibilityElement(self, element):
-        return self.wait.until(EC.visibility_of_element_located(element))
+    def getVisibilityElement(self, locator):
+        return self.wait.until(EC.visibility_of_element_located(locator))
     
-    def getClickableElement(self, element):
-        return self.wait.until(EC.element_to_be_clickable(element))
+    def getClickableElement(self, locator):
+        return self.wait.until(EC.element_to_be_clickable(locator))
+    
+    def waitUntilNotPresent(self, locator):
+        return self.wait.until_not(EC.presence_of_element_located(locator))
     
     def scroll(self, num):
         time.sleep(1)
@@ -76,6 +79,20 @@ class myFeed():
         isDiff =  ImageChops.difference(Image.open(f"reports/screenshots/{funcName}_{imageName}_before.png"), Image.open(f"reports/screenshots/{funcName}_{imageName}_after.png"))
         return isDiff.getbbox() is not None
     
+    def isContainAllField(self, type, category, menuName, review):
+        text = self.getElement(myFeedLocators.MY_MENU_REVIEW_POST).text # 리뷰글 중 가장 최신 리뷰글의 텍스트 내용
+
+        if (type == "혼밥"):
+            if "혼밥" in text and category in text and menuName in text and review in text:
+                return True
+        elif (type == "그룹"):
+            if "그룹" in text and category in text and menuName in text and review in text:
+                return True
+        elif (type == "회식"):
+            if "회식" in text and category in text and menuName in text and review in text:
+                return True
+        return False
+    
     def getRandomImage(self):
         images = ["chicken.jpeg", "hamburger.jpeg", "pizza.jpeg", "ricesoup.jpg", "sushi.jpeg"]
         return random.choice(images)
@@ -86,14 +103,14 @@ class myFeed():
 
     def getRandomCategory(self):
         categories = [
-            ("한식", myFeedLocators.MY_MENU_PLUS_KOREAN_BTN),
-            ("중식", myFeedLocators.MY_MENU_PLUS_CHINESE_BTN),
-            ("양식", myFeedLocators.MY_MENU_PLUS_WESTERN_BTN),
-            ("일식", myFeedLocators.MY_MENU_PLUS_JAPANESE_BTN),
-            ("분식", myFeedLocators.MY_MENU_PLUS_SNACK_BTN),
-            ("아시안", myFeedLocators.MY_MENU_PLUS_ASIAN_BTN),
-            ("패스트푸드", myFeedLocators.MY_MENU_PLUS_FASTFOOD_BTN),
-            ("기타", myFeedLocators.MY_MENU_PLUS_ETC_BTN)
+            ("한식", myFeedLocators.MY_MENU_KOREAN_BTN),
+            ("중식", myFeedLocators.MY_MENU_CHINESE_BTN),
+            ("양식", myFeedLocators.MY_MENU_WESTERN_BTN),
+            ("일식", myFeedLocators.MY_MENU_JAPANESE_BTN),
+            ("분식", myFeedLocators.MY_MENU_SNACK_BTN),
+            ("아시안", myFeedLocators.MY_MENU_ASIAN_BTN),
+            ("패스트푸드", myFeedLocators.MY_MENU_FASTFOOD_BTN),
+            ("기타", myFeedLocators.MY_MENU_ETC_BTN)
         ]
     
         name, locator = random.choice(categories)
@@ -125,7 +142,7 @@ class myFeed():
         prevCount = -1
 
         while True:
-            currentElements = self.getElements(myFeedLocators.MY_MENU_PLUS_REVIEW_POST)
+            currentElements = self.getElements(myFeedLocators.MY_MENU_REVIEW_POST)
             currentCount = len(currentElements)
 
             if currentCount == prevCount:

@@ -42,29 +42,37 @@ MY_PROFILE_STAT_TXT = (By.XPATH, "//span[text()='📊 내 통계']")
 MY_PROFILE_STAT_IMG = (By.XPATH, "//canvas[@role='img']")
 
 # 새로운 후기 등록하기
-MY_MENU_PLUS_CANCEL_BTN = (By.XPATH, "//span[text()='새로운 후기 등록하기']/following-sibling::button/*[name()='svg']")
+MY_MENU_PLUS_CANCEL_SVG = (By.XPATH, "//span[text()='새로운 후기 등록하기']/following-sibling::button/*[name()='svg']")
 
-MY_MENU_PLUS_ALONE_BTN = (By.XPATH, "//button[@value='혼밥']")
-MY_MENU_PLUS_GROUP_BTN = (By.XPATH, "//button[@value='그룹']")
-MY_MENU_PLUS_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
+# 또 먹은 후기 등록하기 페이지
+MY_MENU_EAT_AGAIN_CANCEL_SVG = (By.XPATH, "//span[text()='또 먹은 후기 등록하기']/following-sibling::button/*[name()='svg']")
 
-MY_MENU_PLUS_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/following-sibling::div//button")
-MY_MENU_PLUS_IMG_INPUT = (By.NAME, "reviewImg")
+# 새로운 후기 등록하기 / 또 먹은 후기 등록하기
+MY_MENU_ALONE_BTN = (By.XPATH, "//button[@value='혼밥']")
+MY_MENU_GROUP_BTN = (By.XPATH, "//button[@value='그룹']")
+MY_MENU_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
 
-MY_MENU_PLUS_MENU_NAME_INPUT = (By.XPATH, "//input[@name='menu']")
+MY_MENU_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/following-sibling::div//button")
+MY_MENU_IMG_INPUT = (By.NAME, "reviewImg")
 
-MY_MENU_PLUS_CATEGORY_BTN = (By.XPATH, "//button[@role='combobox']")
-MY_MENU_PLUS_KOREAN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='한식']]")
-MY_MENU_PLUS_CHINESE_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='중식']]")
-MY_MENU_PLUS_WESTERN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='양식']]")
-MY_MENU_PLUS_JAPANESE_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='일식']]")
-MY_MENU_PLUS_SNACK_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='분식']]")
-MY_MENU_PLUS_ASIAN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='아시안']]")
-MY_MENU_PLUS_FASTFOOD_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='패스트푸드']]")
-MY_MENU_PLUS_ETC_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='기타']]")
-NY_MENU_PLUS_CATEGORY_TXT = (By.XPATH, "//h1[text()='카테고리']/following-sibling::button//span") # 카테고리 변경 검증 (text 값 확인)
+MY_MENU_PERSON_NAME_INPUT = (By.XPATH, "//input[@placeholder='이름을 검색해주세요']") # 그룹 전용: 같이 먹는 사람 검색창 (이름 입력 필드)
+MY_MENU_PERSON_NAME_SEARCH_RESULT = (By.CSS_SELECTOR, "ul > li.cursor-pointer") # 그룹 전용: 검색 결과 리스트 중 첫 번째 항목 (자동완성)
+MY_MENU_PERSON_REMOVE_SVG = (By.XPATH, "//h1[text()='같이 먹은 사람 등록']/following-sibling::div[2]//*[name()='svg']") # 등록된 사람 삭제 버튼 (× 아이콘, svg)
 
-MY_MENU_PLUS_REVIEW_TEXTAREA = (By.NAME, "comment")
+MY_MENU_MENU_NAME_INPUT = (By.NAME, "menu")
+
+MY_MENU_CATEGORY_BTN = (By.XPATH, "//button[@role='combobox']")
+MY_MENU_KOREAN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='한식']]")
+MY_MENU_CHINESE_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='중식']]")
+MY_MENU_WESTERN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='양식']]")
+MY_MENU_JAPANESE_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='일식']]")
+MY_MENU_SNACK_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='분식']]")
+MY_MENU_ASIAN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='아시안']]")
+MY_MENU_FASTFOOD_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='패스트푸드']]")
+MY_MENU_ETC_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='기타']]")
+NY_MENU_CATEGORY_TXT = (By.XPATH, "//h1[text()='카테고리']/following-sibling::button//span") # 카테고리 변경 검증 (text 값 확인)
+
+MY_MENU_REVIEW_TEXTAREA = (By.NAME, "comment")
 
 MY_MENU_STAR1 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()="★"])[1]')
 MY_MENU_STAR2 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()="★"])[2]')
@@ -73,12 +81,12 @@ MY_MENU_STAR4 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()
 MY_MENU_STAR5 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()="★"])[5]')
 MY_MENU_STAR_BTN = (By.XPATH, "//input[@name='star']") # 별점 변경 검증 (value 속성값 확인)
 
-MY_MENU_PLUS_COMPLETE_BTN = (By.XPATH, "//button[text()='후기 작성 완료']")
+MY_MENU_COMPLETE_BTN = (By.XPATH, "//button[text()='후기 작성 완료']")
 
-MY_MENU_PLUS_REVIEW_POST = (By.CSS_SELECTOR, "div.flex.w-full.gap-6.p-4.shadow-md.rounded-2xl") # 리뷰 등록 검증 (len으로 개수 파악)
+MY_MENU_REVIEW_POST = (By.CSS_SELECTOR, "div.flex.w-full.gap-6.p-4.shadow-md.rounded-2xl") # 리뷰 등록 검증 (len으로 개수 파악)
 
-MY_MENU_PLUS_IMG_ERROR = (By.XPATH, "//p[text()='리뷰 이미지는 필수입니다']")
-MY_MENU_PLUS_MENU_NAME_ERROR = (By.XPATH, "//p[text()='메뉴명은 필수입니다']")
-MY_MENU_PLUS_CATEGORY_ERROR = (By.XPATH, "//p[text()='카테고리는 필수입니다']")
-MY_MENU_PLUS_REVIEW_ERROR = (By.XPATH, "//p[text()='후기는 필수입니다']")
-MY_MENU_PLUS_STAR_ERROR = (By.XPATH, "//p[text()='별점은 최소 1점 이상이어야 합니다']")
+MY_MENU_IMG_ERROR = (By.XPATH, "//p[text()='리뷰 이미지는 필수입니다']")
+MY_MENU_MENU_NAME_ERROR = (By.XPATH, "//p[text()='메뉴명은 필수입니다']")
+MY_MENU_CATEGORY_ERROR = (By.XPATH, "//p[text()='카테고리는 필수입니다']")
+MY_MENU_REVIEW_ERROR = (By.XPATH, "//p[text()='후기는 필수입니다']")
+MY_MENU_STAR_ERROR = (By.XPATH, "//p[text()='별점은 최소 1점 이상이어야 합니다']")
