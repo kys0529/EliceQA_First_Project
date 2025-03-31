@@ -74,6 +74,7 @@ TEAM_PLUS_REVIEW_ERROR = (By.XPATH, "//p[text()='후기는 필수입니다']")
 TEAM_PLUS_STAR_ERROR = (By.XPATH, "//p[text()='별점은 최소 1점 이상이어야 합니다']")
 TEAM_MENU_PLUS_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/following-sibling::div//button")
 TEAM_MENU_PLUS_IMG_INPUT = (By.NAME, "reviewImg")
+TEAM_MENU_PLUS_REVIEW_POST = (By.CSS_SELECTOR, "div.flex.w-full.gap-6.p-4.shadow-md.rounded-2xl") # 리뷰 등록 검증 (len으로 개수 파악)
 
 
 
