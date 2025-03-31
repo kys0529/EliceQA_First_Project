@@ -8,7 +8,7 @@ import inspect
 from src.pages.myFeed import myFeed
 from src.utils import myFeedLocators
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_001(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -28,7 +28,7 @@ def test_myFeed_001(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_002(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -43,7 +43,7 @@ def test_myFeed_002(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_003(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -58,7 +58,7 @@ def test_myFeed_003(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_004(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -77,7 +77,7 @@ def test_myFeed_004(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_005(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -100,7 +100,7 @@ def test_myFeed_005(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_006(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -124,7 +124,7 @@ def test_myFeed_006(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_007(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -138,7 +138,7 @@ def test_myFeed_007(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_008(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -163,7 +163,7 @@ def test_myFeed_008(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish 
 def test_myFeed_009(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -183,7 +183,7 @@ def test_myFeed_009(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_010(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -224,7 +224,8 @@ def test_myFeed_010(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-def test_myFeed_015(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
+@pytest.mark.finish
+def test_myFeed_015(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
@@ -252,7 +253,7 @@ def test_myFeed_015(createDriver): # (오류 발생: 또 먹은 후기 등록하
         assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
 
         randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        myfeed.getClickableElement(randomStar).click() 
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
 
         myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
@@ -266,7 +267,7 @@ def test_myFeed_015(createDriver): # (오류 발생: 또 먹은 후기 등록하
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_011(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -285,7 +286,7 @@ def test_myFeed_011(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_012(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -337,8 +338,8 @@ def test_myFeed_012(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.ys
-def test_myFeed_016(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
+@pytest.mark.finish
+def test_myFeed_016(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
@@ -374,7 +375,7 @@ def test_myFeed_016(createDriver): # (오류 발생: 또 먹은 후기 등록하
         assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
 
         randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        myfeed.getClickableElement(randomStar).click() 
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
 
         myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
@@ -388,7 +389,7 @@ def test_myFeed_016(createDriver): # (오류 발생: 또 먹은 후기 등록하
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_013(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -407,7 +408,7 @@ def test_myFeed_013(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish # 단독 실행 확인 완료
+@pytest.mark.finish
 def test_myFeed_014(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -448,7 +449,8 @@ def test_myFeed_014(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-def test_myFeed_017(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
+@pytest.mark.finish
+def test_myFeed_017(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
@@ -475,7 +477,7 @@ def test_myFeed_017(createDriver): # (오류 발생: 또 먹은 후기 등록하
         assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
 
         randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        myfeed.getClickableElement(randomStar).click() 
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
 
         myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
