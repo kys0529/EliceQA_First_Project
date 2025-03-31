@@ -63,7 +63,8 @@ RECOMMEND_SEARCH_INPUT = (By.CSS_SELECTOR, "ul.flex.flex-col > li")
 RECOMMEND_SEARCH_RESULT = (By. CSS_SELECTOR, "ul > li.cursor-pointer")
 
 # 👤👤 이름 인풋 박스(결과 추가, "x" 아이콘) / 같이먹기
-RECOMMEND_SEARCH_SELECTED = (By.CSS_SELECTOR, "svg.absolute.top-0.cursor-pointer.-right-2")
+# RECOMMEND_SEARCH_SELECTED = (By.CSS_SELECTOR, "svg.absolute.top-0.cursor-pointer.-right-2")
+RECOMMEND_SEARCH_SELECTED = (By.XPATH, "//span[text()='먹는 인원']/following-sibling::div[1]//svg/path")
 
 # 👤👤 이름 리스트 / 같이먹기
 RECOMMEND_MEMBER_LIST = (By.XPATH, "//div[@class='font-semibold' and text()='정준하']")
