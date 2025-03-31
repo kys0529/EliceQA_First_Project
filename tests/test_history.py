@@ -1,13 +1,51 @@
 # 작업자 이름: 윤찬유
 
-# import pytest
-# import inspect
-# import time
-# from selenium.webdriver.chrome.webdriver import WebDriver
-# from selenium.webdriver.common.by import By
+import pytest
+import inspect
+import time
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
-# from src.pages.history import history
-# from src.utils import historyLocators
+from src.pages.history import history
+from src.utils import historyLocators
+
+@pytest.mark.cy
+def test_history_001(createDriver: WebDriver): 
+    try:
+        myHistory = history(createDriver) 
+        myHistory.goToPage("히스토리")
+        assert myHistory.getElement((By.XPATH, '//span[text()="추천 히스토리"]'))
+
+        # 첫 번째 카드 정보 로딩 기다림
+        myHistory.wait.until(EC.presence_of_element_located((By.XPATH, '(//div[contains(@class, "text-white bg-main")])[1]')))
+        myHistory.wait.until(EC.presence_of_element_located((By.XPATH, '(//div[contains(@class, "text-white bg-sub")])[1]')))
+        myHistory.wait.until(EC.presence_of_element_located((By.XPATH, '(//div[contains(@class, "font-semibold")])[1]')))
+
+        # 🟢 첫 번째 카드에서 정보 저장
+        selected_meal_type = myHistory.getElement((By.XPATH, '(//div[contains(@class, "text-white bg-main")])[1]')).text.strip()
+        selected_category = myHistory.getElement((By.XPATH, '(//div[contains(@class, "text-white bg-sub")])[1]')).text.strip()
+        selected_menu = myHistory.getElement((By.XPATH, '(//div[contains(@class, "font-semibold")])[1]')).text.strip()
+
+        # 추천 후기 등록 버튼 클릭
+        myHistory.wait.until(EC.presence_of_element_located((By.XPATH, '//button[text()="추천 후기 등록하기"]')))
+        myHistory.getElement((By.XPATH, '(//button[text()="추천 후기 등록하기"])[1]')).click()
+
+        # 🟢 후기 폼에서 값 추출
+        input_menu = myHistory.getElement((By.XPATH, '//input[@placeholder="메뉴 명"]')).get_attribute("value").strip()
+        selected_option = myHistory.getElement((By.XPATH, '//select/option[@selected]')).text.strip()
+        selected_radio = myHistory.getElement((By.XPATH, '//input[@type="radio" and @checked]/following-sibling::label')).text.strip()
+
+        # ✅ 값 비교
+        assert input_menu == selected_menu
+        assert selected_option == selected_category
+        assert selected_radio == selected_meal_type
+
+        myHistory.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myHistory.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
 
 # #TESTCASE
 # # @pytest.mark.cy
