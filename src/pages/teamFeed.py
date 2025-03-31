@@ -4,6 +4,7 @@ import json
 import os
 import time
 import random
+
 from faker import Faker
 from PIL import Image, ImageChops
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -11,6 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 from src.utils import teamFeedLocators
 from src.utils.helpers import autoLogin
@@ -22,7 +24,7 @@ class teamFeed():
         self.wait = WebDriverWait(self.driver, 10)
         self.logger = setupLogger("teamFeed")
         self.action = ActionChains(driver)
-
+        
         with open("credentials.json", "r", encoding="utf-8") as f: # 나중에 auth.json 파일 이름을 credentials.json으로 변경해주기
             self.userInfo = json.load(f)
 
@@ -44,11 +46,11 @@ class teamFeed():
             
         elif (depth == "[+] 버튼"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            self.scroll(500)
+            self.action.send_keys(Keys.PAGE_DOWN).perform()
             self.getElement(teamFeedLocators.TEAM_MENU_PLUS_BTN).click()
         elif (depth == "같은 메뉴 먹기"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            self.scroll(500)
+            self.action.send_keys(Keys.PAGE_DOWN).perform()
             self.getElement(teamFeedLocators.TEAM_SAME_MENU_BTN).click()
             
     def pageDown(self, depth):
@@ -66,6 +68,19 @@ class teamFeed():
     def getClickableElement(self, element):
         return self.wait.until(EC.element_to_be_clickable(element))
     
+    def scrollElement(self):
+        while True:
+
+            self.driver.execute_script("window.scrollBy(0, 500);")  # 500픽셀씩 아래로 스크롤
+            time.sleep(1)  # 스크롤 후 대기
+
+            try:
+            
+                self.getElement(teamFeedLocators.TEAM_BUTTON_DOWN).click()
+                break  # 요소를 찾으면 반복 종료
+            
+            except:
+                pass  # 요소가 없으면 스크롤 계속
     
 
     def screenDiff(self, locator, funcName, imageName, action, msg=""):
@@ -135,7 +150,7 @@ class teamFeed():
         prevCount = -1
 
         while True:
-            currentElements = self.getElements(teamFeedLocators.MY_MENU_PLUS_REVIEW_POST)
+            currentElements = self.getElements(teamFeedLocators.TEAM_MENU_PLUS_REVIEW_POST)
             currentCount = len(currentElements)
 
             if currentCount == prevCount:

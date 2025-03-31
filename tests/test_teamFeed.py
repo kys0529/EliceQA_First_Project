@@ -7,6 +7,18 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from src.pages.teamFeed import teamFeed
 from src.utils import teamFeedLocators
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+import json
+import os
+import time
+import random
+
+from faker import Faker
+from PIL import Image, ImageChops
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_teamFeed_001(createDriver: WebDriver):  # 함수명 바꾸셔도 좋아요
@@ -228,10 +240,23 @@ def test_teamFeed_019(createDriver: WebDriver): # 유효값
         raise
     
 
-@pytest.mark.sh
+#구현 못함
 def test_teamFeed_020(createDriver: WebDriver):  #후기 글 추가 노출
     myTeamFeed = teamFeed(createDriver)
-    myTeamFeed.pageDown("page down")
-    myTeamFeed.getElement(teamFeedLocators.TEAM_BUTTON_DOWN).click()
+    myTeamFeed.goToPage("팀 피드")
+    
+
+
+
+    myTeamFeed.scrollElement()  
+    time.sleep(2)
+    
+@pytest.mark.sh 
+def test_teamFeed_021(createDriver: WebDriver): # 또 먹은 후기 노출
+    myTeamFeed = teamFeed(createDriver)
+    myTeamFeed.goToPage("같은 메뉴 먹기")
     time.sleep(1)
+    
+
+    
     
