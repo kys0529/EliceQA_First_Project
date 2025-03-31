@@ -117,19 +117,19 @@ def test_history_006(createDriver: WebDriver):
     try:
         myHistory = history(createDriver) 
         myHistory.goToPage("후기등록혼밥")
-        assert history.screenDiff(historyLocators.REVIEW_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", history.getRandomImage())
         
-        randomReview = history.getRandomReview() # 검증이 필요하므로, 변수에 담음
-        history.getElement(historyLocators.REVIEW_TEXTAREA).send_keys(randomReview)
-        assert history.getElement(historyLocators.REVIEW_TEXTAREA).get_attribute("value") == randomReview
-
-        randomValue, randomStar = history.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        history.getElement(randomStar).click()
-        assert history.getElement(historyLocators.STAR_MENU_BTN).get_attribute("value") == randomValue
-
-        history.getElement(historyLocators.SUBMIT_REVIEW_BTN).click()
-
+        assert myHistory.screenDiff(historyLocators.REVIEW_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myHistory.getRandomImage())
         
+        randomReview = myHistory.getRandomReview()
+        myHistory.getElement(historyLocators.REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myHistory.getElement(historyLocators.REVIEW_TEXTAREA).get_attribute("value") == randomReview
+
+        randomValue, randomStar = myHistory.getRandomStar()
+        myHistory.getElement(randomStar).click()
+        assert myHistory.getElement(historyLocators.STAR_MENU_BTN).get_attribute("value") == randomValue
+
+        myHistory.getElement(historyLocators.SUBMIT_REVIEW_BTN).click()
+
         myHistory.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myHistory.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
