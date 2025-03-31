@@ -30,6 +30,12 @@ class history():
         elif (depth2 == "후기등록혼밥"):
             self.getElement(historyLocators.HISTORY_BTN).click()
             self.getElement(historyLocators.RECOMEND_HON_BTN).click()
+        elif (depth2 == "후기등록같이"):
+            self.getElement(historyLocators.HISTORY_BTN).click()
+            self.getElement(historyLocators.RECOMEND_GROUP_BTN).click()
+        elif (depth2 == "후기등록팀"):
+            self.getElement(historyLocators.HISTORY_BTN).click()
+            self.getElement(historyLocators.RECOMEND_TEAM_BTN).click()
         
     # 단일 요소를 기다릴 때
     def getElement(self, element):
