@@ -28,6 +28,12 @@ class home():
         elif (depth2 == "회식 하기"):
             self.getElement(homeLocators.HOME_TEAM_BTN).click()            
    
+        elif (depth2 == "추천 옵션 선택"):
+            self.getElement(homeLocators.HOME_ALONE_BTN).click()
+            self.getElement(homeLocators.RECOMMEND_CATEGORY_DROPDOWN).click()
+            self.getElement(homeLocators.RECOMMEND_OPTION_KOREAN).click()
+            self.getElement(homeLocators.RECOMMEND_SUBMIT_BTN).click()
+
     # 단일 요소를 기다릴 때
     def getElement(self, element):
         return self.wait.until(EC.presence_of_element_located(element))
