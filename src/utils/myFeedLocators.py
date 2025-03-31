@@ -51,7 +51,11 @@ MY_MENU_PLUS_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
 MY_MENU_PLUS_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/following-sibling::div//button")
 MY_MENU_PLUS_IMG_INPUT = (By.NAME, "reviewImg")
 
-MY_MENU_PLUS_MENU_NAME_INPUT = (By.XPATH, "//input[@name='menu']")
+MY_MENU_PLUS_PERSON_NAME_INPUT = (By.XPATH, "//input[@placeholder='이름을 검색해주세요']") # 그룹 전용: 같이 먹는 사람 검색창 (이름 입력 필드)
+MY_MENU_PLUS_PERSON_NAME_SEARCH_RESULT = (By.CSS_SELECTOR, "ul > li.cursor-pointer") # 그룹 전용: 검색 결과 리스트 중 첫 번째 항목 (자동완성)
+MY_MENU_PLUS_PERSON_REMOVE_SVG = (By.XPATH, "//h1[text()='같이 먹은 사람 등록']/following-sibling::div[2]//*[name()='svg']") # 등록된 사람 삭제 버튼 (× 아이콘, svg)
+
+MY_MENU_PLUS_MENU_NAME_INPUT = (By.NAME, "menu")
 
 MY_MENU_PLUS_CATEGORY_BTN = (By.XPATH, "//button[@role='combobox']")
 MY_MENU_PLUS_KOREAN_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='한식']]")

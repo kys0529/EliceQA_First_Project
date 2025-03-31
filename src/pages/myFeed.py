@@ -53,6 +53,9 @@ class myFeed():
     def getClickableElement(self, element):
         return self.wait.until(EC.element_to_be_clickable(element))
     
+    def waitUntilNotPresent(self, element):
+        return self.wait.until_not(EC.presence_of_element_located(element))
+    
     def scroll(self, num):
         time.sleep(1)
         self.driver.execute_script(f"window.scrollTo(0, {num});")
