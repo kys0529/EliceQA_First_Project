@@ -8,12 +8,17 @@ import inspect
 from src.pages.myFeed import myFeed
 from src.utils import myFeedLocators
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_001(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
+
         assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
+        assert myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_SVG)
+        assert myfeed.getElement(myFeedLocators.MY_PROFILE_STAT_IMG)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_EAT_SAME_MENU_BTN)
 
         myfeed.getElement(myFeedLocators.MY_FEED_BACK_PAGE).click()
         assert myfeed.getElement(myFeedLocators.HOME_TXT)
@@ -23,12 +28,13 @@ def test_myFeed_001(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_002(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_CANCEL_SVG).click()
         assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
 
@@ -37,7 +43,7 @@ def test_myFeed_002(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_003(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -52,7 +58,7 @@ def test_myFeed_003(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_004(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -60,6 +66,7 @@ def test_myFeed_004(createDriver):
         
         sliders = myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDER)
         for slider in sliders:
+            time.sleep(1) # 필수! (삭제 X)
             myfeed.action.click_and_hold(slider).move_by_offset(-500, 0).release().perform()
      
         myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_BTN).click()
@@ -70,14 +77,15 @@ def test_myFeed_004(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_005(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
         
-        myfeed.getVisibilityElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).clear()
-        myfeed.getVisibilityElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).clear()
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).clear()
+        myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).clear()
         myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_BTN).click()
         assert "좋아하는 음식 성향을 이야기해주세요!" == myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).get_attribute("placeholder")
         assert "싫어하는 음식 성향을 이야기해주세요!" == myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).get_attribute("placeholder")
@@ -92,7 +100,7 @@ def test_myFeed_005(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_006(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -102,6 +110,7 @@ def test_myFeed_006(createDriver):
         myfeed.getElement(myFeedLocators.MY_PROFILE_IMG_INPUT).send_keys(imagePath)
         sliders = myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDER)
         for slider in sliders:
+            time.sleep(1) # 필수! (삭제 X)
             myfeed.action.click_and_hold(slider).move_by_offset(500, 0).release().perform()
         myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_LIKE).clear()
         myfeed.getElement(myFeedLocators.MY_PROFILE_TEXTAREA_HATE).clear()
@@ -115,7 +124,7 @@ def test_myFeed_006(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_007(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -129,50 +138,52 @@ def test_myFeed_007(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_008(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("[+] 버튼")
 
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_ALONE_BTN) 
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_GROUP_BTN)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_TEAM_BTN)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_IMG_CHANGE_BTN)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_BTN)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_ALONE_BTN) 
+        assert myfeed.getElement(myFeedLocators.MY_MENU_GROUP_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_TEAM_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_CHANGE_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA)
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN)
 
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CANCEL_BTN).click()
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_BTN)
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CANCEL_SVG).click()
+        assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_009(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("[+] 버튼")
 
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_ALONE_BTN).click()
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_IMG_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_STAR_ERROR)
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_MENU_ALONE_BTN).click()
+        myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_010(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -182,27 +193,27 @@ def test_myFeed_010(createDriver):
 
         myfeed.goToPage("[+] 버튼")
 
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_ALONE_BTN).click()
-        assert myfeed.screenDiff(myFeedLocators.MY_MENU_PLUS_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_ALONE_BTN).click()
+        assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
 
         randomMenuName = myfeed.getRandomMenuName() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).send_keys(randomMenuName)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
+        myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).send_keys(randomMenuName)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
 
         randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음  
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_BTN).click()
-        myfeed.getElement(randomCategory).click()
-        assert myfeed.getElement(myFeedLocators.NY_MENU_PLUS_CATEGORY_TXT).text == randomName
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_CATEGORY_BTN).click()
+        myfeed.getClickableElement(randomCategory).click()
+        assert myfeed.getElement(myFeedLocators.NY_MENU_CATEGORY_TXT).text == randomName
 
         randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).send_keys(randomReview)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
 
         randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(randomStar).click()
+        myfeed.getClickableElement(randomStar).click()
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
 
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
 
         afterReviewCount = myfeed.getReviewPostCount()
 
@@ -213,26 +224,68 @@ def test_myFeed_010(createDriver):
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
-def test_myFeed_011(createDriver):
+def test_myFeed_015(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
     try:
         myfeed = myFeed(createDriver)
-        myfeed.goToPage("[+] 버튼")
+        myfeed.goToPage("개인 피드")
 
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_GROUP_BTN).click()
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_IMG_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_STAR_ERROR)
+        beforeReviewCount = myfeed.getReviewPostCount()
+
+        myfeed.goToPage("같은 메뉴 먹기")
+
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_MENU_EAT_AGAIN_CANCEL_SVG).click()
+        assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
+
+        myfeed.goToPage("같은 메뉴 먹기")
+        assert myfeed.getElement(myFeedLocators.MY_MENU_ALONE_BTN).get_attribute("data-state") == "checked"
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("disabled") is not None
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_BTN).get_attribute("disabled") is not None
+
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).clear()
+        myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
+
+        randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+
+        randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
+        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
+
+        myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+
+        afterReviewCount = myfeed.getReviewPostCount()
+
+        assert beforeReviewCount + 1 == afterReviewCount
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.finish
+@pytest.mark.finish # 단독 실행 확인 완료
+def test_myFeed_011(createDriver):
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("[+] 버튼")
+
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_GROUP_BTN).click()
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+@pytest.mark.finish # 단독 실행 확인 완료
 def test_myFeed_012(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -242,98 +295,38 @@ def test_myFeed_012(createDriver):
 
         myfeed.goToPage("[+] 버튼")
 
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_GROUP_BTN).click()
-        assert myfeed.screenDiff(myFeedLocators.MY_MENU_PLUS_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_GROUP_BTN).click()
+        assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
 
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_PERSON_NAME_INPUT).send_keys("김")
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_PERSON_NAME_SEARCH_RESULT).click()
-        assert myfeed.getElements(myFeedLocators.MY_MENU_PLUS_PERSON_REMOVE_SVG)
+        myfeed.getElement(myFeedLocators.MY_MENU_PERSON_NAME_INPUT).send_keys("김")
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_PERSON_NAME_SEARCH_RESULT).click()
+        assert myfeed.getElements(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG)
 
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_PERSON_REMOVE_SVG).click()
-        myfeed.waitUntilNotPresent(myFeedLocators.MY_MENU_PLUS_PERSON_REMOVE_SVG) # 요소가 사라지지 않으면, 예외 발생
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG).click()
+        myfeed.waitUntilNotPresent(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG) # 요소가 사라지지 않으면, 예외 발생
         
-        time.sleep(2)
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_PERSON_NAME_INPUT).send_keys("김")
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_PERSON_NAME_SEARCH_RESULT).click()
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_MENU_PERSON_NAME_INPUT).send_keys("김")
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_PERSON_NAME_SEARCH_RESULT).click()
 
         randomMenuName = myfeed.getRandomMenuName() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).send_keys(randomMenuName)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
+        myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).send_keys(randomMenuName)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
 
         randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_BTN).click()
-        myfeed.getElement(randomCategory).click()
-        assert myfeed.getElement(myFeedLocators.NY_MENU_PLUS_CATEGORY_TXT).text == randomName
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_CATEGORY_BTN).click()
+        myfeed.getClickableElement(randomCategory).click()
+        assert myfeed.getElement(myFeedLocators.NY_MENU_CATEGORY_TXT).text == randomName
 
         randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).send_keys(randomReview)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
 
         randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(randomStar).click()
+        myfeed.getClickableElement(randomStar).click()
         assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
 
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
-
-        afterReviewCount = myfeed.getReviewPostCount()
-
-        assert beforeReviewCount + 1 == afterReviewCount
-
-        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-        raise
-
-@pytest.mark.finish
-def test_myFeed_013(createDriver):
-    try:
-        myfeed = myFeed(createDriver)
-        myfeed.goToPage("[+] 버튼")
-
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_TEAM_BTN).click()
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_IMG_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_ERROR)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_STAR_ERROR)
-
-        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
-    except Exception as e:
-        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
-        raise
-
-@pytest.mark.finish
-def test_myFeed_014(createDriver):
-    try:
-        myfeed = myFeed(createDriver)
-        myfeed.goToPage("개인 피드")
-
-        beforeReviewCount = myfeed.getReviewPostCount()
-
-        myfeed.goToPage("[+] 버튼")
-
-        myfeed.getClickableElement(myFeedLocators.MY_MENU_PLUS_TEAM_BTN).click()
-        assert myfeed.screenDiff(myFeedLocators.MY_MENU_PLUS_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
-
-        randomMenuName = myfeed.getRandomMenuName() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).send_keys(randomMenuName)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
-
-        randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_CATEGORY_BTN).click()
-        myfeed.getElement(randomCategory).click()
-        assert myfeed.getElement(myFeedLocators.NY_MENU_PLUS_CATEGORY_TXT).text == randomName
-
-        randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).send_keys(randomReview)
-        assert myfeed.getElement(myFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).get_attribute("value") == randomReview
-
-        randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
-        myfeed.getElement(randomStar).click()
-        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
-
-        myfeed.getElement(myFeedLocators.MY_MENU_PLUS_COMPLETE_BTN).click()
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
 
         afterReviewCount = myfeed.getReviewPostCount()
 
@@ -345,36 +338,151 @@ def test_myFeed_014(createDriver):
         raise
 
 @pytest.mark.ys
-def test_myFeed_015(createDriver):
+def test_myFeed_016(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
 
-        # 미구현
+        beforeReviewCount = myfeed.getReviewPostCount()
+
+        myfeed.goToPage("같은 메뉴 먹기")
+
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getElement(myFeedLocators.MY_MENU_EAT_AGAIN_CANCEL_SVG).click()
+        assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
+
+        myfeed.goToPage("같은 메뉴 먹기")
+        assert myfeed.getElement(myFeedLocators.MY_MENU_GROUP_BTN).get_attribute("data-state") == "checked"
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("disabled") is not None
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_BTN).get_attribute("disabled") is not None
+
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).clear()
+        myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
+        
+        time.sleep(1) # 필수! (삭제 X)
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG).click()
+        myfeed.waitUntilNotPresent(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG) # 요소가 사라지지 않으면, 예외 발생
+
+        myfeed.getElement(myFeedLocators.MY_MENU_PERSON_NAME_INPUT).send_keys("김")
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_PERSON_NAME_SEARCH_RESULT).click()
+        assert myfeed.getElements(myFeedLocators.MY_MENU_PERSON_REMOVE_SVG)
+
+        randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+
+        randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
+        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
+
+        myfeed.getElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+
+        afterReviewCount = myfeed.getReviewPostCount()
+
+        assert beforeReviewCount + 1 == afterReviewCount
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-def test_myFeed_016(createDriver):
+@pytest.mark.finish # 단독 실행 확인 완료
+def test_myFeed_013(createDriver):
     try:
         myfeed = myFeed(createDriver)
-        myfeed.goToPage("개인 피드")
+        myfeed.goToPage("[+] 버튼")
 
-        # 미구현
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_TEAM_BTN).click()
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-def test_myFeed_017(createDriver):
+@pytest.mark.finish # 단독 실행 확인 완료
+def test_myFeed_014(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("개인 피드")
 
-        # 미구현
+        beforeReviewCount = myfeed.getReviewPostCount()
+
+        myfeed.goToPage("[+] 버튼")
+
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_TEAM_BTN).click()
+        assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
+
+        randomMenuName = myfeed.getRandomMenuName() # 검증이 필요하므로, 변수에 담음
+        myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).send_keys(randomMenuName)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("value") == randomMenuName
+
+        randomName, randomCategory = myfeed.getRandomCategory() # 검증이 필요하므로, 변수에 담음
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_CATEGORY_BTN).click()
+        myfeed.getClickableElement(randomCategory).click()
+        assert myfeed.getElement(myFeedLocators.NY_MENU_CATEGORY_TXT).text == randomName
+
+        randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+
+        randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
+        myfeed.getClickableElement(randomStar).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
+
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+
+        afterReviewCount = myfeed.getReviewPostCount()
+
+        assert beforeReviewCount + 1 == afterReviewCount
+
+        myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
+    except Exception as e:
+        myfeed.logger.warning(f"[❗] {inspect.currentframe().f_code.co_name} : {e}")
+        raise
+
+def test_myFeed_017(createDriver): # (오류 발생: 또 먹은 후기 등록하기 - 별점 클릭)
+    try:
+        myfeed = myFeed(createDriver)
+        myfeed.goToPage("개인 피드")
+
+        beforeReviewCount = myfeed.getReviewPostCount()
+
+        myfeed.goToPage("같은 메뉴 먹기")
+
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_EAT_AGAIN_CANCEL_SVG).click()
+        assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
+
+        myfeed.goToPage("같은 메뉴 먹기")
+        assert myfeed.getElement(myFeedLocators.MY_MENU_TEAM_BTN).get_attribute("data-state") == "checked"
+        assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("disabled") is not None
+        assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_BTN).get_attribute("disabled") is not None
+
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).clear()
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_ERROR)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_ERROR)
+
+        randomReview = myfeed.getRandomReview() # 검증이 필요하므로, 변수에 담음
+        myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).send_keys(randomReview)
+        assert myfeed.getElement(myFeedLocators.MY_MENU_REVIEW_TEXTAREA).get_attribute("value") == randomReview
+
+        randomValue, randomStar = myfeed.getRandomStar() # 검증이 필요하므로, 변수에 담음
+        myfeed.getClickableElement(randomStar).click() # !!!!!!!!!!!!! Timeout 오류 발생 !!!!!!!!!!!!!
+        assert myfeed.getElement(myFeedLocators.MY_MENU_STAR_BTN).get_attribute("value") == randomValue
+
+        myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+
+        afterReviewCount = myfeed.getReviewPostCount()
+
+        assert beforeReviewCount + 1 == afterReviewCount
 
         myfeed.logger.info(f"[✅] {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
