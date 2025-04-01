@@ -3,20 +3,21 @@
 pipeline {
     agent any
 
-    environment {
-        CREDS_JSON = credentials('credentials-json')
-    }
-    
     stages {
         stage('Run Tests') {
             steps {
-                sh '''
-                    cp "$CREDS_JSON" credentials.json
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install -r requirements.txt
-                    python3 -m pytest
-                '''
+                // credentials-json-file: Jenkins에 등록한 Secret File의 ID
+                withCredentials([file(credentialsId: 'credentials-json-file', variable: 'CREDS_FILE')]) {
+                    dir("${env.WORKSPACE}") {
+                        sh '''
+                            cat "$CREDS_FILE" > credentials.json
+                            python3 -m venv venv
+                            . venv/bin/activate
+                            pip install -r requirements.txt
+                            python3 -m pytest
+                        '''
+                    }
+                }
             }
         }
     }
