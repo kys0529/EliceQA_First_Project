@@ -14,7 +14,7 @@ def createDriver():
     chromeOption.add_argument('--no-sandbox')               # 샌드박스 보안 기능 비활성화 (리눅스 환경에서 주로 사용)
     chromeOption.add_argument('--disable-dev-shm-usage')    # /dev/shm 용량 부족 문제 방지 (Docker, CI 환경에서 유용)
     chromeOption.add_argument('--disable-gpu')              # GPU 가속 비활성화 (가상환경에서 렌더링 오류 방지)
-    chromeOption.add_argument('--headless')               # GUI 없이 브라우저 실행 (백그라운드 테스트 시 사용)
+    # chromeOption.add_argument('--headless')               # GUI 없이 브라우저 실행 (백그라운드 테스트 시 사용)
     chromeOption.page_load_strategy = "eager"               # DOMContentLoaded 이벤트 이후 바로 다음 단계로 진행 (빠른 로딩)
 
     driver = webdriver.Chrome(options=chromeOption)
