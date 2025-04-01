@@ -6,8 +6,7 @@ pipeline {
     stages {
         stage('Run Tests') {
             steps {
-                // credentials-json-file: Jenkins에 등록한 Secret File의 ID
-                withCredentials([file(credentialsId: 'credentials-json-file', variable: 'CREDS_FILE')]) {
+                withCredentials([file(credentialsId: 'credentials-json', variable: 'CREDS_FILE')]) {
                     dir("${env.WORKSPACE}") {
                         sh '''
                             cat "$CREDS_FILE" > credentials.json
