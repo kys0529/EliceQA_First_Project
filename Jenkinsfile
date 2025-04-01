@@ -2,23 +2,16 @@
 
 pipeline {
     agent any
-
+    
     stages {
         stage('Run Tests') {
             steps {
-                script {
-                    dir("${env.WORKSPACE}") {
-                        withCredentials([file(credentialsId: 'credentials-json', variable: 'CREDS_FILE')]) {
-                            sh '''
-                                cat "$CREDS_FILE" > credentials.json
-                                python3 -m venv venv
-                                . venv/bin/activate
-                                pip install -r requirements.txt
-                                python3 -m pytest
-                            '''
-                        }
-                    }
-                }
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                    python3 -m pytest
+                '''
             }
         }
     }
