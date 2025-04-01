@@ -43,15 +43,17 @@ class teamFeed():
     def goToPage(self, depth):
         if depth == "팀 피드":
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            
+        elif (depth == "프로필 수정"):
+            self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
+            self.getElement(teamFeedLocators.TEAM_PROFILE_CHANGE_SVG).click()
         elif (depth == "[+] 버튼"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
             self.action.send_keys(Keys.PAGE_DOWN).perform()
             self.getElement(teamFeedLocators.TEAM_MENU_PLUS_BTN).click()
         elif (depth == "같은 메뉴 먹기"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            self.action.send_keys(Keys.PAGE_DOWN).perform()
-            self.getElement(teamFeedLocators.TEAM_SAME_MENU_BTN).click()
+            self.scroll(1000)
+            self.getElement(teamFeedLocators.TEAM_EAT_SAME_MENU_BTN).click()
             
     def pageDown(self, depth):
         if depth == "page down":
@@ -71,7 +73,7 @@ class teamFeed():
     def scrollElement(self):
         while True:
 
-            self.driver.execute_script("window.scrollBy(0, 500);")  # 500픽셀씩 아래로 스크롤
+            self.driver.execute_script("document.body.scrollBy(0, 500);")  # 500픽셀씩 아래로 스크롤
             time.sleep(1)  # 스크롤 후 대기
 
             try:
@@ -136,11 +138,11 @@ class teamFeed():
 
     def getRandomStar(self):
         stars = [
-            ("1", teamFeedLocators.MY_MENU_STAR1),
-            ("2", teamFeedLocators.MY_MENU_STAR2),
-            ("3", teamFeedLocators.MY_MENU_STAR3),
-            ("4", teamFeedLocators.MY_MENU_STAR4),
-            ("5", teamFeedLocators.MY_MENU_STAR5)
+            ("1", teamFeedLocators.TEAM_MENU_STAR1),
+            ("2", teamFeedLocators.TEAM_MENU_STAR2),
+            ("3", teamFeedLocators.TEAM_MENU_STAR3),
+            ("4", teamFeedLocators.TEAM_MENU_STAR4),
+            ("5", teamFeedLocators.TEAM_MENU_STAR5)
         ]
 
         value, locator = random.choice(stars)

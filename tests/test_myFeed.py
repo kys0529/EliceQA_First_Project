@@ -68,7 +68,7 @@ def test_myFeed_004(createDriver):
         for slider in sliders:
             time.sleep(1) # 필수! (삭제 X)
             myfeed.action.click_and_hold(slider).move_by_offset(-500, 0).release().perform()
-     
+      
         myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_BTN).click()
         assert len(myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDERBAR_ERROR)) == 3
 
