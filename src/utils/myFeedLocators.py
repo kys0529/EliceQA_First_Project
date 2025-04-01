@@ -20,6 +20,8 @@ MY_EAT_SAME_MENU_BTN = (By.XPATH, "//span[contains(text(), '내가 먹은 메뉴
 MY_FEED_TXT = (By.XPATH, "//span[text()='내 피드']")
 
 # 프로필 수정
+MY_PROFILE_CHANGE_TXT = (By.XPATH, "//span[text()='프로필 정보 수정']")
+
 MY_PROFILE_CHANGE_SVG = (By.XPATH, "//*[name()='svg' and @class='cursor-pointer']")
 MY_PROFILE_CHANGE_CANCEL_SVG = (By.XPATH, "//span[contains(text(), '프로필 정보 수정')]/following-sibling::button")
 

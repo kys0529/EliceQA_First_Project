@@ -21,7 +21,7 @@ class myFeed():
         self.logger = setupLogger("myFeed")
         self.action = ActionChains(driver)
 
-        with open("credentials.json", "r", encoding="utf-8") as f: # 나중에 auth.json 파일 이름을 credentials.json으로 변경해주기
+        with open("credentials.json", "r", encoding="utf-8") as f:
             self.userInfo = json.load(f)
 
         autoLogin(self.driver, self.wait, self.userInfo)
@@ -46,9 +46,6 @@ class myFeed():
 
     def getElements(self, locator):
         return self.wait.until(EC.presence_of_all_elements_located(locator))
-    
-    def getVisibilityElement(self, locator):
-        return self.wait.until(EC.visibility_of_element_located(locator))
     
     def getClickableElement(self, locator):
         return self.wait.until(EC.element_to_be_clickable(locator))
@@ -78,20 +75,6 @@ class myFeed():
 
         isDiff =  ImageChops.difference(Image.open(f"reports/screenshots/{funcName}_{imageName}_before.png"), Image.open(f"reports/screenshots/{funcName}_{imageName}_after.png"))
         return isDiff.getbbox() is not None
-    
-    def isContainAllField(self, type, category, menuName, review):
-        text = self.getElement(myFeedLocators.MY_MENU_REVIEW_POST).text # 리뷰글 중 가장 최신 리뷰글의 텍스트 내용
-
-        if (type == "혼밥"):
-            if "혼밥" in text and category in text and menuName in text and review in text:
-                return True
-        elif (type == "그룹"):
-            if "그룹" in text and category in text and menuName in text and review in text:
-                return True
-        elif (type == "회식"):
-            if "회식" in text and category in text and menuName in text and review in text:
-                return True
-        return False
     
     def getRandomImage(self):
         images = ["chicken.jpeg", "hamburger.jpeg", "pizza.jpeg", "ricesoup.jpg", "sushi.jpeg"]
