@@ -2,15 +2,20 @@
 
 pipeline {
     agent any
+
+    environment {
+        CREDS_JSON = credentials('credentials-json')
+    }
     
     stages {
         stage('Run Tests') {
             steps {
                 sh '''
+                    cp "$CREDS_JSON" credentials.json
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install -r requirements.txt
-                    python3 -m pytest tests/test_mainPage.py
+                    python3 -m pytest
                 '''
             }
         }
