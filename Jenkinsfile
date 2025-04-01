@@ -4,18 +4,20 @@ pipeline {
     environment {
         CREDS_JSON = credentials('credentials-json')
     }
-    
+
     stages {
         stage('Run Tests') {
             steps {
                 dir("$WORKSPACE") {
-                    sh '''
-                        echo "$CREDS_JSON" > credentials.json
+                    sh """
+                        cat <<EOF > credentials.json
+$CREDS_JSON
+EOF
                         python3 -m venv venv
                         . venv/bin/activate
                         pip install -r requirements.txt
                         python3 -m pytest
-                    '''
+                    """
                 }
             }
         }
