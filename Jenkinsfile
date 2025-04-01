@@ -11,6 +11,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
+                    cd $WORKSPACE
                     cp "$CREDS_JSON" credentials.json
                     python3 -m venv venv
                     . venv/bin/activate
