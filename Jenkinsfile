@@ -6,12 +6,18 @@ pipeline {
     stages {
         stage('Run Tests') {
             steps {
-                sh '''
+                withCredentials([file(credentialsId: 'credentials-json', variable: 'CREDENTIALS_JSON')]) {
+                    sh '''
+                    cp $CREDENTIALS_JSON credentials.json
+                    
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install -r requirements.txt
                     python3 -m pytest
-                '''
+                    
+                    rm credentials.json
+                    '''
+                }
             }
         }
     }
