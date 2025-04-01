@@ -62,6 +62,9 @@ RECOMMEND_SEARCH_INPUT = (By.CSS_SELECTOR, "ul.flex.flex-col > li")
 # 👤👤 이름 인풋 박스(결과 선택 단계) / 같이먹기
 RECOMMEND_SEARCH_RESULT = (By. CSS_SELECTOR, "ul > li.cursor-pointer")
 
+# 👤👤 이름 인풋 박스(결과 선택 완료 단계) / 같이먹기
+RECOMMEND_SEARCH_SELECTED_BOX = (By.CSS_SELECTOR, 'div.flex.flex-col.items-center.justify-center.max-w-18')
+
 # 👤👤 이름 인풋 박스(결과 추가, "x" 아이콘) / 같이먹기
 # RECOMMEND_SEARCH_SELECTED = (By.CSS_SELECTOR, "svg.absolute.top-0.cursor-pointer.-right-2")
 RECOMMEND_SEARCH_SELECTED = (By.XPATH, "//span[text()='먹는 인원']/following-sibling::div[1]//svg/path")
