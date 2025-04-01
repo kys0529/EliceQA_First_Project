@@ -39,7 +39,7 @@ MY_MENU_EAT_AGAIN_CANCEL_SVG = (By.XPATH, "//span[text()='또 먹은 후기 등�
 
 
 TEAM_FEED_TAB = (By.CSS_SELECTOR, 'a[href^="/teams/"]')
-TEAM_FEED_BACK_BTN = (By.XPATH, "//*[local-name()='svg' and @class='rounded-full cursor-pointer']")
+
 TEAM_PROFILE_CHANGE = (By.XPATH, "//*[local-name()='svg' and @class='cursor-pointer']")
 TEAM_SAME_MENU = (By.XPATH, "//button[text()='같은 메뉴 먹기']")
 TEAM_BUTTON_UP = (By.XPATH, "//p[@class='pr-3 text-description']")
@@ -134,7 +134,7 @@ TEAM_MENU_FASTFOOD_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='패�
 TEAM_MENU_ETC_BTN = (By.XPATH, "//div[@role='option'][.//span[text()='기타']]")
 TEAM_MENU_CATEGORY_TXT = (By.XPATH, "//h1[text()='카테고리']/following-sibling::button//span") # 카테고리 변경 검증 (text 값 확인)
 
-TEAM_MENU_REVIEW_TEXTAREA = (By.NAME, "comment")
+TEAM_MENU_REVIEW_TEXTAREA = (By.XPATH, "//textarea[@placeholder='후기를 등록 입력해주세요.']")
 
 TEAM_MENU_STAR1 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()="★"])[1]')
 TEAM_MENU_STAR2 = (By.XPATH, '(//div[contains(@class, "cursor-pointer") and text()="★"])[2]')
@@ -147,6 +147,8 @@ TEAM_MENU_COMPLETE_BTN = (By.XPATH, "//button[text()='후기 작성 완료']")
 
 TEAM_MENU_REVIEW_POST = (By.CSS_SELECTOR, "div.flex.w-full.gap-6.p-4.shadow-md.rounded-2xl") # 리뷰 등록 검증 (len으로 개수 파악)
 
+
+#에러 메시지
 TEAM_MENU_IMG_ERROR = (By.XPATH, "//p[text()='리뷰 이미지는 필수입니다']")
 TEAM_MENU_MENU_NAME_ERROR = (By.XPATH, "//p[text()='메뉴명은 필수입니다']")
 TEAM_MENU_CATEGORY_ERROR = (By.XPATH, "//p[text()='카테고리는 필수입니다']")
