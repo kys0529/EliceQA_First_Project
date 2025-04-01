@@ -7,7 +7,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir("${env.WORKSPACE}") {
-                    withCredentials([file(credentialsId: 'credentials-json-file', variable: 'CREDS_FILE')]) {
+                    withCredentials([file(credentialsId: 'credentials-json', variable: 'CREDS_FILE')]) {
                         sh '''
                             cat "$CREDS_FILE" > credentials.json
                             python3 -m venv venv
