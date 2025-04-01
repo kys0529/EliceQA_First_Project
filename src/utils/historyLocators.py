@@ -12,33 +12,71 @@ RECOMEND_HISTORY = (By.XPATH, '//span[text()="추천 히스토리"]')
 # 상단 타이틀
 RECOMEND_TITLE = (By.XPATH, '//span[contains(text(),"추천 받았던 메뉴들이에요!")]')
 # 이미지(첫 번째 추천 이미지)
-FIRST_MENU_IMAGE = (By.XPATH, '(//img[contains(@class, "object-cover")])[1]')
+MENU_IMAGE1 = (By.XPATH, '(//img[contains(@class, "object-cover")])[1]')
+MENU_IMAGE2 = (By.XPATH, '(//img[contains(@class, "object-cover")])[2]')
+MENU_IMAGE3 = (By.XPATH, '(//img[contains(@class, "object-cover")])[3]')
+
 # 한식라벨 - 페이지 첫 번째  @ 한식 아니라면 변경!!
 LABEL_HANSIK = (By.XPATH, '(//div[text()="한식"])[1]')
+LABEL_HANSIK2 = (By.XPATH, '(//div[text()="한식"])[2]')
+LABEL_HANSIK3 = (By.XPATH, '(//div[text()="한식"])[3]')
+
+
 # 혼밥라벨 - 페이지 첫 번째 @ 혼밥 아니라면 변경!!
 LABEL_HONBAB = (By.XPATH, '(//div[text()="혼밥"])[1]')
 LABEL_GROUP = (By.XPATH, '(//div[text()="그룹"])[1]')
 LABEL_TEAM = (By.XPATH, '(//div[text()="회식"])[1]')
+
 # 음식명 텍스트 바로 찾기 - @ 타코 아니라면 변경!!
 MENU_TACO = (By.XPATH, '//div[text()="타코"]')
 MENU_RICECAKESOUP = (By.XPATH, '//div[text()="떡국"]')
-MENU_Jjimdak = (By.XPATH, '//div[text()="찜닭"]')
+MENU_JJIMDAK = (By.XPATH, '//div[text()="찜닭"]')
 MENU_Dongtae_jjigae = (By.XPATH, '//div[text()="동태찌개"]')
 MENU_Nakgopsae = (By.XPATH, '//div[text()="낙곱새"]')
-MENU_JAPCHAE = (By.XPATH, '//div[text()="잡채채"]')
+MENU_JAPCHAE = (By.XPATH, '//div[text()="잡채"]')
 MENU_DONGTAETANG = (By.XPATH, '//div[text()="동태탕"]')
 MENU_HOE = (By.XPATH, '//div[text()="회"]')
 MENU_HAEMUL_PAJEON = (By.XPATH, '//div[text()="해물파전"]')
 MENU_MANDUGUK = (By.XPATH, '//div[text()="만둣국"]')
 MENU_HAEMULTANG = (By.XPATH, '//div[text()="해물탕"]')
 MENU_JANGEO_GUI = (By.XPATH, '//div[text()="장어구이"]')
+MENU_GALBIJJIM = (By.XPATH, '//div[text()="소갈비찜"]')
+MENU_Gogijeon = (By.XPATH, '//div[text()="고기전"]')
+
+
+
+
+# 메뉴 고정되고 비활성화 확인
+
+MENU_TACO_INPUT = (By.XPATH, '//input[@name="menu" and @value="타코" and @disabled]')
+MENU_TTEOKGUK_INPUT = (By.XPATH, '//input[@name="menu" and @value="떡국" and @disabled]')
+MENU_JJIMDAK_INPUT = (By.XPATH, '//input[@name="menu" and @value="찜닭" and @disabled]')
+MENU_DONGTAE_JJIGAE_INPUT = (By.XPATH, '//input[@name="menu" and @value="동태찌개" and @disabled]')
+MENU_NAKGOPSAE_INPUT = (By.XPATH, '//input[@name="menu" and @value="낙곱새" and @disabled]')
+MENU_JAPCHAE_INPUT = (By.XPATH, '//input[@name="menu" and @value="잡채" and @disabled]')
+MENU_DONGTAETANG_INPUT = (By.XPATH, '//input[@name="menu" and @value="동태탕" and @disabled]')
+MENU_HOE_INPUT = (By.XPATH, '//input[@name="menu" and @value="회" and @disabled]')
+MENU_HAEMUL_PAJEON_INPUT = (By.XPATH, '//input[@name="menu" and @value="해물파전" and @disabled]')
+MENU_MANDUGUK_INPUT = (By.XPATH, '//input[@name="menu" and @value="만둣국" and @disabled]')
+MENU_HAEMULTANG_INPUT = (By.XPATH, '//input[@name="menu" and @value="해물탕" and @disabled]')
+MENU_JANGEO_GUI_INPUT = (By.XPATH, '//input[@name="menu" and @value="장어구이" and @disabled]')
+MENU_GALBIJJIM_INPUT = (By.XPATH, '//input[@name="menu" and @value="소갈비찜" and @disabled]')
+MENU_Gogijeon_INPUT = (By.XPATH, '//input[@name="menu" and @value="고기전" and @disabled]')
+
+
+
+
+
 
 
 
 # AI가 분석한 취향 적합률
 AI_COMMAND = (By.XPATH, '(//span[contains(text(),"AI가 분석한 취향 적합률")])[1]')
-# 추천후기 등록 하기 버튼 누르기 - 혼밥
-RECOMEND_HON_BTN = (By.XPATH,'(//button[text()="추천 후기 등록하기"])[1]')
+AI_COMMAND2 = (By.XPATH, '(//span[contains(text(),"AI가 분석한 취향 적합률")])[2]')
+AI_COMMAND3 = (By.XPATH, '(//span[contains(text(),"AI가 분석한 취향 적합률")])[3]')
+
+# 추천후기 등록 하기 버튼 누르기 -
+RECOMEND_BTN = (By.XPATH,'(//button[text()="추천 후기 등록하기"])[1]')
 RECOMEND_GROUP_BTN = (By.XPATH,'(//button[text()="추천 후기 등록하기"])[2]')
 RECOMEND_TEAM_BTN = (By.XPATH,'(//button[text()="추천 후기 등록하기"])[3]')
 
@@ -50,11 +88,13 @@ REVIEW_X_BTN = (By.XPATH, "//span[text()='후기 등록하기']/following-siblin
 HONBAB_RADIO_SELECTED = (By.XPATH, '//button[@id="혼밥" and @aria-checked="true"]')
 GROUP_RADIO_SELECTED = (By.XPATH, '//button[@id="그룹" and @aria-checked="true"]')
 TEAM_RADIO_SELECTED = (By.XPATH, '//button[@id="회식" and @aria-checked="true"]')
-
+#   or 추가....ㅠㅠ
 # 그룹 라디오
 HONBAB_RADIO_NO_SELECTED = (By.XPATH, '//button[@id="혼밥" and @aria-checked="false"]')
 GROUP_RADIO_NO_SELECTED = (By.XPATH, '//button[@id="그룹" and @aria-checked="false"]')
 TEAM_RADIO_NO_SELECTED = (By.XPATH, '//button[@id="회식" and @aria-checked="false"]')
+
+#
 
 
 MEAL_TYPE_TITLE = (By.XPATH, '//h1[text()="식사 유형"]')
@@ -100,7 +140,7 @@ REVIEW_SUBMIT_DONE_BTN = (By.XPATH, '//button[text()="후기 등록 완료" and 
 
 ####같이 먹기
 GROUP_EAT = (By.XPATH, '//h1[text()="같이 먹은 사람 등록"]')
-GROUP_EAT_PEOPLE = (By.XPATH, '//div[@class="flex items-center gap-4 overflow-x-auto whitespace-nowrap"]/div')
+GROUP_EAT_PEOPLE = (By.XPATH, '//div[contains(@class,"items-center")]/div[contains(@class,"relative")]')
 
 # 추천 카드 - 메뉴명 텍스트
 MENU_NAME_TEXT = (By.XPATH, '(//div[contains(@class,"text-base")])[1]')
