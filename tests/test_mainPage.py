@@ -109,7 +109,7 @@ def test_register_005(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("회원가입 페이지")
 
-        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys("test@naver")
+        myMainPage.getElement(mainLocators.REGP_EMAIL_INPUT).send_keys("dkanrjsk@naver")
         myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
         myMainPage.getElement(mainLocators.REGP_GOING_BTN).click()
 
@@ -129,12 +129,10 @@ def test_register_006(createDriver):
 
         myMainPage.getElement(mainLocators.REGP_PW_INPUT).send_keys(myMainPage.faker.password(length=8))
         myMainPage.getElement(mainLocators.REGP_PW_TOGGLE_BTN).click()
-        time.sleep(1)
         assert "text" in myMainPage.getElement(mainLocators.REGP_PW_INPUT).get_attribute("type")
         myMainPage.logger.info("▶️ register_019 - 비밀번호 표시 아이콘 확인")
 
         myMainPage.getElement(mainLocators.REGP_PW_TOGGLE_BTN).click()
-        time.sleep(1)
         assert "password" in myMainPage.getElement(mainLocators.REGP_PW_INPUT).get_attribute("type")
         myMainPage.logger.info("▶️ register_020 - 비밀번호 숨기기 아이콘 확인")
 
@@ -277,8 +275,6 @@ def test_register_15(createDriver):
         sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
         for slider in sliders:
             time.sleep(1) # 필수! (삭제 X)
-            myMainPage.action.click_and_hold(slider).move_by_offset(-500, 0).release().perform()
-            time.sleep(1) # 필수! (삭제 X)
             myMainPage.action.click_and_hold(slider).move_by_offset(30, 0).release().perform()
      
         myMainPage.getElement(mainLocators.USERINFO_SUBMIT_BTN).click()
@@ -300,8 +296,6 @@ def test_register_16(createDriver):
         sliders = myMainPage.getElements(mainLocators.USERINFO_SLIDER)
         for slider in sliders:
             time.sleep(1) # 필수! (삭제 X)
-            myMainPage.action.click_and_hold(slider).move_by_offset(-500, 0).release().perform()
-            time.sleep(1) # 필수! (삭제 X)
             myMainPage.action.click_and_hold(slider).move_by_offset(240, 0).release().perform()
 
         func = 37
@@ -310,6 +304,7 @@ def test_register_16(createDriver):
             assert value.text == "3.0"
             myMainPage.logger.info(f"▶️ register_0{func} - 음식 성향 슬라이드 바 3.0 노출 확인")
             func = func + 1
+        time.sleep(1)
 
         myMainPage.logger.info(f"✅ {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
@@ -334,7 +329,7 @@ def test_register_17(createDriver):
         myMainPage.logger.warning(f"❗ {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.ys
+@pytest.mark.finish
 def test_register_18(createDriver):
     try:
         myMainPage = mainPage(createDriver)
@@ -399,7 +394,7 @@ def test_login_004(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("로그인 페이지")
 
-        myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys("test@naver")
+        myMainPage.getElement(mainLocators.LOGINP_EMAIL_INPUT).send_keys("dkanrjsk@naver")
         myMainPage.getElement(mainLocators.LOGINP_PW_INPUT).send_keys("1234")
         myMainPage.getElement(mainLocators.LOGINP_GOING_BTN).click()
 
@@ -475,13 +470,13 @@ def test_login_009(createDriver):
         myMainPage = mainPage(createDriver)
         myMainPage.goToPage("비밀번호 재설정 페이지")
 
-        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@")
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("dkanrjsk@")
         myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
         assert myMainPage.getElement(mainLocators.RESET_EMAIL_ERROR_TXT)
         myMainPage.logger.info("▶️ login_017 - 유효하지 않은 이메일 입력 후 [계속] 버튼 클릭 시 에러 문구 노출 확인")
 
         myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).clear()
-        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("test@naver.com")
+        myMainPage.getElement(mainLocators.RESET_EMAIL_INPUT).send_keys("dkanrjsk@naver.com")
         myMainPage.getElement(mainLocators.RESET_GOING_BTN).click()
         assert myMainPage.getElement(mainLocators.MAIL_TXT)
         myMainPage.logger.info("▶️ login_018 - 유효한 이메일 입력 후 [계속] 버튼 클릭 시 메일 확인 안내 페이지 이동 확인")
