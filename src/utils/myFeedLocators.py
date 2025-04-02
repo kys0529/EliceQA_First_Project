@@ -46,7 +46,7 @@ MY_PROFILE_STAT_IMG = (By.XPATH, "//canvas[@role='img']")
 # 새로운 후기 등록하기
 MY_MENU_PLUS_CANCEL_SVG = (By.XPATH, "//span[text()='새로운 후기 등록하기']/following-sibling::button/*[name()='svg']")
 
-# 또 먹은 후기 등록하기 페이지
+# 또 먹은 후기 등록하기
 MY_MENU_EAT_AGAIN_CANCEL_SVG = (By.XPATH, "//span[text()='또 먹은 후기 등록하기']/following-sibling::button/*[name()='svg']")
 
 # 새로운 후기 등록하기 / 또 먹은 후기 등록하기

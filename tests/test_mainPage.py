@@ -304,7 +304,6 @@ def test_register_16(createDriver):
             assert value.text == "3.0"
             myMainPage.logger.info(f"▶️ register_0{func} - 음식 성향 슬라이드 바 3.0 노출 확인")
             func = func + 1
-        time.sleep(1)
 
         myMainPage.logger.info(f"✅ {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
