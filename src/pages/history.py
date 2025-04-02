@@ -27,15 +27,11 @@ class history():
     def goToPage(self, depth2):
         if (depth2 == "히스토리"):
             self.getElement(historyLocators.HISTORY_BTN).click()
-        elif (depth2 == "후기등록혼밥"):
+        elif (depth2 == "후기등록페이지"):
+            time.sleep(2)
             self.getElement(historyLocators.HISTORY_BTN).click()
-            self.getElement(historyLocators.RECOMEND_HON_BTN).click()
-        elif (depth2 == "후기등록같이"):
-            self.getElement(historyLocators.HISTORY_BTN).click()
-            self.getElement(historyLocators.RECOMEND_GROUP_BTN).click()
-        elif (depth2 == "후기등록팀"):
-            self.getElement(historyLocators.HISTORY_BTN).click()
-            self.getElement(historyLocators.RECOMEND_TEAM_BTN).click()
+            time.sleep(2)
+            self.getElement(historyLocators.RECOMEND_BTN).click()
         
     # 단일 요소를 기다릴 때
     def getElement(self, element):
