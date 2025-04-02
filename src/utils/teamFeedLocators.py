@@ -100,7 +100,7 @@ TEAM_PLUS_GROUP_BTN = (By.XPATH, "//button[@value='그룹']")
 TEAM_PLUS_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
 TEAM_MENU_NAME = (By.NAME, "menu")
 TEAM_STAR_BTN = (By.XPATH, "//input[@name='star']") # value 속성값 바꾸면 별점 변경도 되려나?
-TEAM_PLUS_COMPLETE_BTN = (By.XPATH, "//button[text()='후기 작성 완료']")
+TEAM_PLUS_COMPLETE_BTN = (By.XPATH, "/html/body/div[2]/div/div[2]/section/form/button")
 TEAM_PLUS_IMG_ERROR = (By.XPATH, "//p[text()='리뷰 이미지는 필수입니다']")
 TEAM_PLUS_MENU_NAME_ERROR = (By.XPATH, "//p[text()='메뉴명은 필수입니다']")
 TEAM_PLUS_CATEGORY_ERROR = (By.XPATH, "//p[text()='카테고리는 필수입니다']")
@@ -110,9 +110,9 @@ TEAM_MENU_PLUS_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/followi
 TEAM_MENU_PLUS_IMG_INPUT = (By.NAME, "reviewImg")
 TEAM_MENU_PLUS_REVIEW_POST = (By.CSS_SELECTOR, "div.flex.w-full.gap-6.p-4.shadow-md.rounded-2xl") # 리뷰 등록 검증 (len으로 개수 파악)
 
-TEAM_MENU_ALONE_BTN = (By.XPATH, "//button[@value='혼밥']")
-TEAM_MENU_GROUP_BTN = (By.XPATH, "//button[@value='그룹']")
-TEAM_MENU_TEAM_BTN = (By.XPATH, "//button[@value='회식']")
+TEAM_MENU_ALONE_BTN = (By.XPATH, "//button[@id='혼밥']")
+TEAM_MENU_GROUP_BTN = (By.XPATH, "//button[@id='그룹']")
+TEAM_MENU_TEAM_BTN = (By.XPATH, "//button[@id='회식']")
 
 TEAM_MENU_IMG_CHANGE_BTN = (By.XPATH, "//h1[text()='후기 사진']/following-sibling::div//button")
 TEAM_MENU_IMG_INPUT = (By.NAME, "reviewImg")

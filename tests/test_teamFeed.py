@@ -299,7 +299,6 @@ def test_teamFeed_016(createDriver: WebDriver):  # 팀이 먹은 메뉴의 [+] �
         myTeamFeed.logger.info("▶️ team_feed_051 - 새로운 후기 등록하기 페이지 노출")
         assert myTeamFeed.getElement(teamFeedLocators.MY_MENU_PLUS_CANCEL_SVG).is_displayed()
         
-        
         myTeamFeed.logger.info(f"✅ {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myTeamFeed.logger.warning(f"❗ {inspect.currentframe().f_code.co_name} : {e}")
@@ -323,20 +322,20 @@ def test_teamFeed_017(createDriver: WebDriver):  # 새로운 후기 등록하기
         raise
     
 
-@pytest.mark.sh
+@pytest.mark.again
 def test_teamFeed_018(createDriver: WebDriver):  # 새로운 후기 등록하기 에서 혼밥, 그룹, 회식 버튼 클릭
     try:
         myTeamFeed = teamFeed(createDriver)
         myTeamFeed.goToPage("[+] 버튼")
         myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_ALONE_BTN).click() #혼밥 라디오 버튼 클릭
-        
+        time.sleep(1)
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_ALONE_BTN).is_displayed()
         myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_GROUP_BTN).click() #그룹 라디오 버튼 
         myTeamFeed.logger.info("▶️ team_feed_053 - 같이 먹은 사람 등록 텍스트박스 추가로 노출")
-        
+        time.sleep(1)
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_GROUP_BTN).is_displayed()
         myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_TEAM_BTN).click()  #회식 라디오 버튼 클릭
-        
+        time.sleep(1)
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_PLUS_TEAM_BTN).is_displayed()
         
         myTeamFeed.logger.info(f"✅ {inspect.currentframe().f_code.co_name} 통과")
@@ -344,7 +343,7 @@ def test_teamFeed_018(createDriver: WebDriver):  # 새로운 후기 등록하기
         myTeamFeed.logger.warning(f"❗ {inspect.currentframe().f_code.co_name} : {e}")
         raise
 
-@pytest.mark.sh
+@pytest.mark.again
 def test_teamFeed_019(createDriver: WebDriver):  # 필수입력사항 누락
     try:
         myTeamFeed = teamFeed(createDriver)
@@ -355,8 +354,8 @@ def test_teamFeed_019(createDriver: WebDriver):  # 필수입력사항 누락
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_MENU_CATEGORY_ERROR).is_displayed()   
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_MENU_REVIEW_ERROR).is_displayed()   
         assert myTeamFeed.getElement(teamFeedLocators.TEAM_MENU_STAR_ERROR).is_displayed()   
-        myTeamFeed.logger.info("▶️ team_feed_059 - 이미지, 메뉴명, 카테고리, 후기, 별점 모두 필수입력 메시지 노출")
         
+        myTeamFeed.logger.info("▶️ team_feed_059 - 이미지, 메뉴명, 카테고리, 후기, 별점 모두 필수입력 메시지 노출")
         myTeamFeed.logger.info(f"✅ {inspect.currentframe().f_code.co_name} 통과")
     except Exception as e:
         myTeamFeed.logger.warning(f"❗ {inspect.currentframe().f_code.co_name} : {e}")
@@ -368,18 +367,18 @@ def test_teamFeed_020(createDriver: WebDriver):  # [+]버튼 메뉴 등록 유�
         myTeamFeed = teamFeed(createDriver)
         myTeamFeed.goToPage("[+] 버튼")
         assert myTeamFeed.screenDiff(teamFeedLocators.TEAM_MENU_PLUS_IMG_INPUT,inspect.currentframe().f_code.co_name,"reviewImg","image",myTeamFeed.getRandomImage())  # 이미지 업로드
-
+        
         randomMenuName = (myTeamFeed.getRandomMenuName())  # 검증이 필요하므로, 변수에 담음
         myTeamFeed.getElement(teamFeedLocators.TEAM_MENU_NAME).send_keys(randomMenuName)
         assert (myTeamFeed.getElement(teamFeedLocators.TEAM_MENU_NAME).get_attribute("value") == randomMenuName)
-
+        
         randomName, randomCategory = (
             myTeamFeed.getRandomCategory()
         )  # 검증이 필요하므로, 변수에 담음   카테고리 현재 작동이 안됨
         myTeamFeed.getElement(teamFeedLocators.RECOMMEND_CATEGORY_DROPDOWN).click()
         myTeamFeed.getElement(randomCategory).click()
         assert (myTeamFeed.getElement(teamFeedLocators.RECOMMEND_OPTION_LABEL).text == randomName)
-
+        
         randomReview = myTeamFeed.getRandomReview()  # 검증이 필요하므로, 변수에 담음
         myTeamFeed.getElement(teamFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).send_keys(randomReview)
         assert (myTeamFeed.getElement(teamFeedLocators.MY_MENU_PLUS_REVIEW_TEXTAREA).get_attribute("value") == randomReview)
@@ -402,7 +401,7 @@ def test_teamFeed_020(createDriver: WebDriver):  # [+]버튼 메뉴 등록 유�
 
 
 
-@pytest.mark.sh
+@pytest.mark.again
 def test_teamFeed_021(createDriver: WebDriver):  # 또 먹은 후기 노출
     try:
         myTeamFeed = teamFeed(createDriver)

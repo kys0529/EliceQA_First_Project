@@ -48,11 +48,11 @@ class teamFeed():
             self.getElement(teamFeedLocators.TEAM_PROFILE_CHANGE_SVG).click()
         elif (depth == "[+] 버튼"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            self.action.send_keys(Keys.PAGE_DOWN).perform()
+            self.scroll(500)
             self.getElement(teamFeedLocators.TEAM_MENU_PLUS_BTN).click()
         elif (depth == "같은 메뉴 먹기"):
             self.getElement(teamFeedLocators.TEAM_FEED_TAB).click()
-            self.scroll(1000)
+            self.scroll(500)
             self.getElement(teamFeedLocators.TEAM_EAT_SAME_MENU_BTN).click()
             
     def pageDown(self, depth):
