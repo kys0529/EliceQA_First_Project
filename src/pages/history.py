@@ -28,9 +28,7 @@ class history():
         if (depth2 == "히스토리"):
             self.getElement(historyLocators.HISTORY_BTN).click()
         elif (depth2 == "후기등록페이지"):
-            time.sleep(2)
             self.getElement(historyLocators.HISTORY_BTN).click()
-            time.sleep(2)
             self.getElement(historyLocators.RECOMEND_BTN).click()
         
     # 단일 요소를 기다릴 때
@@ -42,7 +40,6 @@ class history():
         return self.wait.until(EC.presence_of_all_elements_located(element))
     
     def screenDiff(self, locator, funcName, imageName, action, msg=""):
-        time.sleep(2)
         self.driver.save_screenshot(f"reports/screenshots/{funcName}_{imageName}_before.png")
         
         if (action == "click"):
@@ -53,7 +50,6 @@ class history():
             imagePath = os.path.abspath(os.path.join("src/resources/assets", msg))
             self.getElement(locator).send_keys(imagePath)
 
-        time.sleep(2)
         self.driver.save_screenshot(f"reports/screenshots/{funcName}_{imageName}_after.png")
 
         isDiff =  ImageChops.difference(Image.open(f"reports/screenshots/{funcName}_{imageName}_before.png"), Image.open(f"reports/screenshots/{funcName}_{imageName}_after.png"))
