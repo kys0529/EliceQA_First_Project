@@ -2,14 +2,13 @@
  
 from selenium.webdriver.common.by import By
 
-# 메인 페이지 요소
+# 메인 페이지
 MAINP_LOGIN_BTN = (By.XPATH, "//button[text()='로그인하기']")
 MAINP_REGISTER_BTN = (By.XPATH, "//button[text()='회원가입']")
 
 MAINP_TXT = (By.XPATH, "//p[text()='오늘의 식사 메뉴를 추천해드립니다']")
 
-# 로그인 페이지 요소 (메인 페이지 -> [로그인하기] 버튼 클릭)
-# 메인 페이지에서 [로그인하기] 버튼 클릭 / test_register_022, test_register_023, test_register_020, test_register_024
+# 로그인 페이지 (메인 페이지 -> [로그인하기] 버튼 클릭)
 LOGINP_EMAIL_INPUT = (By.ID, "username")
 LOGINP_PW_INPUT = (By.ID, "password")
 LOGINP_PW_TOGGLE_BTN = (By.XPATH, "//button[@data-action='toggle']") # 해당 버튼을 누르면 LOGINP_PW_INPUT type 속성이 변동됨
@@ -20,7 +19,7 @@ LOGINP_REGISTER_HREF = (By.XPATH, "//a[text()='회원가입']")
 LOGINP_LOGIN_ERROR_TXT = (By.ID, "error-element-password")
 LOGINP_TXT = (By.XPATH, "//p[text()='맛있는 선택은 당신의 하루를 바꿉니다.']")
 
-# 회원가입 페이지 요소 (메인 페이지 -> [회원가입] 버튼 클릭)
+# 회원가입 페이지 (메인 페이지 -> [회원가입] 버튼 클릭)
 REGP_EMAIL_INPUT = (By.ID, "email")
 REGP_PW_INPUT = (By.ID, "password")
 REGP_PW_TOGGLE_BTN = (By.XPATH, "//button[@data-action='toggle']") # 해당 버튼을 누르면 REGP_PW_INPUT type 속성이 변동됨
@@ -56,7 +55,7 @@ AUTH_DECLINE_BTN = (By.XPATH, "//button[text()='Decline']")
 
 AUTH_TXT = (By.XPATH, "//h1[text()='Authorize App']")
 
-# 로그인 오류페이지 (앱 인증권한 페이지 -> [Decline] 버튼 클릭)
+# 로그인 오류 페이지 (앱 인증권한 페이지 -> [Decline] 버튼 클릭)
 ERROR_RETRY = (By.XPATH, "//button[text()='다시 시도하기']") # 해당 버튼을 누르면 메인 페이지로 돌아감
 
 ERROR_TXT = (By.XPATH, "//h2[text()='로그인 오류']")
@@ -85,5 +84,5 @@ USERINFO_SUBMIT_BTN = (By.XPATH, "//button[text()='제출하기']")
 
 USERINFO_TXT = (By.XPATH, "//span[text()='🔥 서비스 이용을 위해 인적사항을 작성해주세요']")
 
-# 홈 탭 요소
+# 홈 탭
 HOME_TXT = (By.XPATH, "//p[text()='💻 AI를 통해 음식 메뉴를 추천 받아 보세요!']")
