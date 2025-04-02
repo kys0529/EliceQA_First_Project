@@ -242,7 +242,7 @@ def test_home_002(createDriver):
         raise
 
 
-@pytest.mark.dy
+@pytest.mark.finish
 def test_home_003(createDriver): 
     try:
         myhome = home(createDriver) 
