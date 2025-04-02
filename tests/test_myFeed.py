@@ -8,7 +8,7 @@ import inspect
 from src.pages.myFeed import myFeed
 from src.utils import myFeedLocators
 
-@pytest.mark.finish
+@pytest.mark.ys
 def test_myFeed_001(createDriver):
     try:
         myfeed = myFeed(createDriver)
@@ -69,7 +69,7 @@ def test_myFeed_004(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
-        
+
         func = 7
         sliders = myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDER)
         for slider in sliders:
@@ -80,7 +80,7 @@ def test_myFeed_004(createDriver):
                 func = func + 2
             elif func > 10:
                 myfeed.logger.info(f"▶️ myfeed_0{func} - 슬라이드 바 조절 확인")
-     
+
         myfeed.getElement(myFeedLocators.MY_PROFILE_CHANGE_COMPLETE_BTN).click()
         assert len(myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDERBAR_ERROR)) == 3
         myfeed.logger.info(f"▶️ myfeed_008 - 슬라이드 바 에러 문구 확인")
@@ -125,7 +125,7 @@ def test_myFeed_006(createDriver):
     try:
         myfeed = myFeed(createDriver)
         myfeed.goToPage("프로필 수정")
-        
+
         imagePath = os.path.abspath(os.path.join("src/resources/assets", "profileImage.jpg"))
         myfeed.getElement(myFeedLocators.MY_PROFILE_IMG_INPUT).send_keys(imagePath)
         sliders = myfeed.getElements(myFeedLocators.MY_PROFILE_SLIDER)
@@ -218,6 +218,7 @@ def test_myFeed_010(createDriver):
 
         myfeed.goToPage("[+] 버튼")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getClickableElement(myFeedLocators.MY_MENU_ALONE_BTN).click()
         assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
 
@@ -265,6 +266,7 @@ def test_myFeed_015(createDriver):
         assert myfeed.getElement(myFeedLocators.MY_FEED_TXT)
 
         myfeed.goToPage("같은 메뉴 먹기")
+        time.sleep(1) # 필수! (삭제 X)
         assert myfeed.getElement(myFeedLocators.MY_MENU_ALONE_BTN).get_attribute("data-state") == "checked"
         assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_INPUT).get_attribute("disabled") is not None
         assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_BTN).get_attribute("disabled") is not None
@@ -301,6 +303,7 @@ def test_myFeed_011(createDriver):
         myfeed = myFeed(createDriver)
         myfeed.goToPage("[+] 버튼")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getClickableElement(myFeedLocators.MY_MENU_GROUP_BTN).click()
         myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
         assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_ERROR)
@@ -325,6 +328,7 @@ def test_myFeed_012(createDriver):
 
         myfeed.goToPage("[+] 버튼")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getClickableElement(myFeedLocators.MY_MENU_GROUP_BTN).click()
         assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
 
@@ -429,8 +433,10 @@ def test_myFeed_013(createDriver):
         myfeed = myFeed(createDriver)
         myfeed.goToPage("[+] 버튼")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getClickableElement(myFeedLocators.MY_MENU_TEAM_BTN).click()
         myfeed.getClickableElement(myFeedLocators.MY_MENU_COMPLETE_BTN).click()
+        time.sleep(1) # 필수! (삭제 X)
         assert myfeed.getElement(myFeedLocators.MY_MENU_IMG_ERROR)
         assert myfeed.getElement(myFeedLocators.MY_MENU_MENU_NAME_ERROR)
         assert myfeed.getElement(myFeedLocators.MY_MENU_CATEGORY_ERROR)
@@ -453,6 +459,7 @@ def test_myFeed_014(createDriver):
 
         myfeed.goToPage("[+] 버튼")
 
+        time.sleep(1) # 필수! (삭제 X)
         myfeed.getClickableElement(myFeedLocators.MY_MENU_TEAM_BTN).click()
         assert myfeed.screenDiff(myFeedLocators.MY_MENU_IMG_INPUT, inspect.currentframe().f_code.co_name, "reviewImg", "image", myfeed.getRandomImage())
 
