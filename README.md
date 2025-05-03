@@ -30,7 +30,7 @@ AI 기반 직장인 점심 메뉴 및 회식 장소 추천 서비스
 - CI: Jenkins
 
 ## ⚙️ 환경 설정
-📁 credentials.json 예시 (루트 디렉토리에 위치)
+📁 `credentials.json` 예시 (루트 디렉토리에 위치)
 ```json
 {
     "id": "${LOGIN_ID}",
